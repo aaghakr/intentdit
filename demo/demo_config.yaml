@@ -1,0 +1,184 @@
+# Demo Configuration File
+# Defines checkpoint paths for all 24 experiments and model weights
+
+# Base paths
+base_checkpoint_dir: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/checkpoints"
+base_model_weights_dir: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights"
+
+# Model weights for saliency and intent detection
+model_weights:
+  saliency:
+    basnet: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights/saliency_detection/basnet.pth"
+    isnet: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights/saliency_detection/isnet.pth"
+    u2net: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights/saliency_detection/u2net.pth"
+  
+  intent:
+    pku: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights/intent_map/design_intent_pku_epoch100.pth"
+    cgl: "/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/data/model_weights/intent_map/design_intent_cgl_epoch35.pth"
+
+# Experiment checkpoints - PKU Dataset (12 experiments)
+pku_experiments:
+  # ViT Encoder
+  pku_vit_saliency:
+    checkpoint: null  # Will use latest from pku/vit_saliency/
+    encoder: "vit"
+    spatial_guidance: "saliency"
+    text_control: false
+  
+  pku_vit_intent:
+    checkpoint: null  # Will use latest from pku/vit_intent/
+    encoder: "vit"
+    spatial_guidance: "intent"
+    text_control: false
+  
+  pku_vit_both:
+    checkpoint: null  # Will use latest from pku/vit_both/
+    encoder: "vit"
+    spatial_guidance: "both"
+    text_control: false
+  
+  pku_vit_saliency_text:
+    checkpoint: null  # Will use latest from pku/vit_saliency_text/
+    encoder: "vit"
+    spatial_guidance: "saliency"
+    text_control: true
+  
+  pku_vit_intent_text:
+    checkpoint: null  # Will use latest from pku/vit_intent_text/
+    encoder: "vit"
+    spatial_guidance: "intent"
+    text_control: true
+  
+  pku_vit_both_text:
+    checkpoint: null  # Will use latest from pku/vit_both_text/
+    encoder: "vit"
+    spatial_guidance: "both"
+    text_control: true
+  
+  # Swin Encoder
+  pku_swin_saliency:
+    checkpoint: null  # Will use latest from pku/swin_saliency/
+    encoder: "swin"
+    spatial_guidance: "saliency"
+    text_control: false
+  
+  pku_swin_intent:
+    checkpoint: null  # Will use latest from pku/swin_intent/
+    encoder: "swin"
+    spatial_guidance: "intent"
+    text_control: false
+  
+  pku_swin_both:
+    checkpoint: null  # Will use latest from pku/swin_both/
+    encoder: "swin"
+    spatial_guidance: "both"
+    text_control: false
+  
+  pku_swin_saliency_text:
+    checkpoint: null  # Will use latest from pku/swin_saliency_text/
+    encoder: "swin"
+    spatial_guidance: "saliency"
+    text_control: true
+  
+  pku_swin_intent_text:
+    checkpoint: null  # Will use latest from pku/swin_intent_text/
+    encoder: "swin"
+    spatial_guidance: "intent"
+    text_control: true
+  
+  pku_swin_both_text:
+    checkpoint: null  # Will use latest from pku/swin_both_text/
+    encoder: "swin"
+    spatial_guidance: "both"
+    text_control: true
+
+# Experiment checkpoints - CGL Dataset (12 experiments)
+cgl_experiments:
+  # ViT Encoder
+  cgl_vit_saliency:
+    checkpoint: null  # Will use latest from cgl/vit_saliency/
+    encoder: "vit"
+    spatial_guidance: "saliency"
+    text_control: false
+  
+  cgl_vit_intent:
+    checkpoint: null  # Will use latest from cgl/vit_intent/
+    encoder: "vit"
+    spatial_guidance: "intent"
+    text_control: false
+  
+  cgl_vit_both:
+    checkpoint: null  # Will use latest from cgl/vit_both/
+    encoder: "vit"
+    spatial_guidance: "both"
+    text_control: false
+  
+  cgl_vit_saliency_text:
+    checkpoint: null  # Will use latest from cgl/vit_saliency_text/
+    encoder: "vit"
+    spatial_guidance: "saliency"
+    text_control: true
+  
+  cgl_vit_intent_text:
+    checkpoint: null  # Will use latest from cgl/vit_intent_text/
+    encoder: "vit"
+    spatial_guidance: "intent"
+    text_control: true
+  
+  cgl_vit_both_text:
+    checkpoint: null  # Will use latest from cgl/vit_both_text/
+    encoder: "vit"
+    spatial_guidance: "both"
+    text_control: true
+  
+  # Swin Encoder
+  cgl_swin_saliency:
+    checkpoint: null  # Will use latest from cgl/swin_saliency/
+    encoder: "swin"
+    spatial_guidance: "saliency"
+    text_control: false
+  
+  cgl_swin_intent:
+    checkpoint: null  # Will use latest from cgl/swin_intent/
+    encoder: "swin"
+    spatial_guidance: "intent"
+    text_control: false
+  
+  cgl_swin_both:
+    checkpoint: null  # Will use latest from cgl/swin_both/
+    encoder: "swin"
+    spatial_guidance: "both"
+    text_control: false
+  
+  cgl_swin_saliency_text:
+    checkpoint: null  # Will use latest from cgl/swin_saliency_text/
+    encoder: "swin"
+    spatial_guidance: "saliency"
+    text_control: true
+  
+  cgl_swin_intent_text:
+    checkpoint: null  # Will use latest from cgl/swin_intent_text/
+    encoder: "swin"
+    spatial_guidance: "intent"
+    text_control: true
+  
+  cgl_swin_both_text:
+    checkpoint: null  # Will use latest from cgl/swin_both_text/
+    encoder: "swin"
+    spatial_guidance: "both"
+    text_control: true
+
+# Default settings
+defaults:
+  device: "cuda"  # or "cpu"
+  batch_size: 1
+  image_size: 512
+  num_classes:
+    pku: 4
+    cgl: 5
+  
+# Fallback behavior
+fallback:
+  use_latest_checkpoint: true  # If specific checkpoint not found, use latest
+  create_dummy_output: true    # If no checkpoint found, create dummy output
+  log_missing_checkpoints: true  # Log when checkpoints are missing

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- Intent-Aware Layout Generation Paper -->
+  <meta name="title" content="Intent-Aware Layout Generation with Natural Language Control - Abdul Waheed Aagha">
+  <!-- Compelling description of research contribution -->
+  <meta name="description" content="First text-controllable transformer-diffusion framework for layout generation with intent-aware spatial guidance and comprehensive multi-modal datasets">
+  <!-- Relevant keywords for layout generation research -->
+  <meta name="keywords" content="layout generation, text control, intent detection, spatial guidance, transformer, diffusion models, computer vision, natural language processing">
+  <!-- Author information -->
+  <meta name="author" content="Abdul Waheed Aagha">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- Soongsil University -->
+  <meta property="og:site_name" content="Soongsil University">
+  <!-- Intent-Aware Layout Generation -->
+  <meta property="og:title" content="Intent-Aware Layout Generation with Natural Language Control">
+  <!-- Research description -->
+  <meta property="og:description" content="First text-controllable transformer-diffusion framework for layout generation with intent-aware spatial guidance and comprehensive multi-modal datasets">
+  <!-- Project page URL -->
+  <meta property="og:url" content="https://aagha-ii.github.io/intent-aware-layout-generation">
+  <!-- Social preview image -->
+  <meta property="og:image" content="https://aagha-ii.github.io/intent-aware-layout-generation/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Intent-Aware Layout Generation - Research Preview">
+  <meta property="article:published_time" content="2024-12-25T00:00:00.000Z">
+  <meta property="article:author" content="Abdul Waheed Aagha">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="layout generation">
+  <meta property="article:tag" content="text control">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Soongsil University Twitter -->
+  <meta name="twitter:site" content="@SoongsilUniv">
+  <!-- Author Twitter handle -->
+  <meta name="twitter:creator" content="@aagha_ii">
+  <!-- Paper title -->
+  <meta name="twitter:title" content="Intent-Aware Layout Generation with Natural Language Control">
+  <!-- Research description -->
+  <meta name="twitter:description" content="First text-controllable transformer-diffusion framework for layout generation with intent-aware spatial guidance and comprehensive multi-modal datasets">
+  <!-- Social preview image -->
+  <meta name="twitter:image" content="https://aagha-ii.github.io/intent-aware-layout-generation/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="Intent-Aware Layout Generation - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Intent-Aware Layout Generation with Natural Language Control">
+  <meta name="citation_author" content="Aagha, Abdul Waheed">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="Conference on Computer Vision and Pattern Recognition">
+  <meta name="citation_pdf_url" content="https://aagha-ii.github.io/intent-aware-layout-generation/static/pdfs/paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- Intent-Aware Layout Generation Paper -->
+  <title>Intent-Aware Layout Generation with Natural Language Control - Abdul Waheed Aagha | Academic Research</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Intent-Aware Layout Generation with Natural Language Control",
+    "description": "First text-controllable transformer-diffusion framework for layout generation with intent-aware spatial guidance and comprehensive multi-modal datasets",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Abdul Waheed Aagha",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Soongsil University"
+        }
+      }
+    ],
+    "datePublished": "2024-12-25",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Conference on Computer Vision and Pattern Recognition"
+    },
+    "url": "https://aagha-ii.github.io/intent-aware-layout-generation",
+    "image": "https://aagha-ii.github.io/intent-aware-layout-generation/static/images/social_preview.png",
+    "keywords": ["layout generation", "text control", "intent detection", "spatial guidance", "transformer", "diffusion models", "computer vision", "natural language processing"],
+    "abstract": "We introduce the first text-controllable transformer-diffusion framework for layout generation, enabling natural language specification of design requirements while maintaining high-quality output through intent-aware spatial guidance. Our multi-modal approach represents a significant advancement in making automated layout generation more accessible and controllable.",
+    "citation": "@article{aagha2024intent, title={Intent-Aware Layout Generation with Natural Language Control}, author={Aagha, Abdul Waheed}, journal={Conference on Computer Vision and Pattern Recognition}, year={2024}}",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://aagha-ii.github.io/intent-aware-layout-generation"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Layout Generation"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Natural Language Processing"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Soongsil University",
+    "url": "https://www.ssu.ac.kr",
+    "logo": "https://aagha-ii.github.io/intent-aware-layout-generation/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/SoongsilUniv",
+      "https://github.com/aagha-ii"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works -->
+        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
+          <div class="work-info">
+            <!-- TODO: Replace with actual paper title -->
+            <h5>Paper Title 1</h5>
+            <!-- TODO: Replace with brief description -->
+            <p>Brief description of the work and its main contribution.</p>
+            <!-- TODO: Replace with venue and year -->
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <!-- TODO: Add more related works or remove extra items -->
+        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 3</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- Intent-Aware Layout Generation Paper -->
+            <h1 class="title is-1 publication-title">Intent-Aware Layout Generation with Natural Language Control</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Author information -->
+              <span class="author-block">
+                <a href="https://aagha-ii.github.io" target="_blank">Abdul Waheed Aagha</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <!-- Institution and conference information -->
+              <span class="author-block">Soongsil University<br>Conference on Computer Vision and Pattern Recognition 2024</span>
+            </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Paper PDF link -->
+                      <span class="link-block">
+                        <a href="static/pdfs/paper.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary material PDF -->
+                    <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span>
+
+                  <!-- GitHub repository -->
+                  <span class="link-block">
+                    <a href="https://github.com/aagha-ii/intent_aware_layout_generation" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Demo link -->
+                <span class="link-block">
+                  <a href="https://aagha-ii.github.io/intent-aware-layout-generation/demo" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-play"></i>
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- TODO: Replace with your teaser video -->
+      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+        <!-- TODO: Add your video file path here -->
+        <source src="static/videos/banner_video.mp4" type="video/mp4">
+      </video>
+      <!-- Video description -->
+      <h2 class="subtitle has-text-centered">
+        Our intent-aware layout generation framework enables natural language control for creating layouts with spatial guidance. Watch how our system generates layouts based on text descriptions while maintaining design principles and visual hierarchy.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- Paper abstract -->
+          <p>
+            We introduce the first text-controllable transformer-diffusion framework for layout generation, enabling natural language specification of design requirements while maintaining high-quality output through intent-aware spatial guidance. Our multi-modal approach integrates textual semantics with visual features while preserving content-graphic balance principles. We develop a design-specific intent detection system that captures spatial importance based on layout context rather than generic visual saliency. Our framework extends existing PKU and CGL layout datasets with comprehensive natural language descriptions, creating the first publicly available text-controlled layout datasets with over 300,000 natural language descriptions across 4 distinct prompt styles. Through extensive experiments across 24 configurations (2 datasets × 2 encoders × 6 spatial guidance combinations), we demonstrate significant improvements in layout quality, user satisfaction, and semantic understanding compared to existing methods. Our work establishes a new research direction in text-controlled layout generation and provides open-source datasets to benefit the research community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- Unconditional layout generation -->
+        <img src="static/images/carousel1.jpg" alt="Unconditional layout generation results" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Unconditional Layout Generation: Our framework generates diverse layouts without any constraints, demonstrating the model's ability to create varied and realistic designs.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Conditional layout generation -->
+        <img src="static/images/carousel2.jpg" alt="Conditional layout generation with text control" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Text-Controlled Generation: Natural language prompts guide layout creation, enabling intuitive design specification through descriptions like "Create a poster with a logo in the top-left corner."
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Spatial guidance visualization -->
+        <img src="static/images/carousel3.jpg" alt="Spatial guidance and intent detection visualization" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Intent-Aware Spatial Guidance: Our system uses design-specific intent detection to understand spatial importance, providing more accurate guidance than generic visual saliency.
+        </h2>
+     </div>
+     <div class="item">
+      <!-- Multi-modal comparison -->
+      <img src="static/images/carousel4.jpg" alt="Multi-modal framework comparison" loading="lazy"/>
+      <h2 class="subtitle has-text-centered">
+        Multi-Modal Integration: Cross-modal attention mechanisms effectively integrate textual semantics with visual features while preserving content-graphic balance principles.
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+
+
+<!-- Youtube video -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <!-- Paper video. -->
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <!-- TODO: Replace with your YouTube video ID -->
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End youtube video -->
+
+
+<!-- Video carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Another Carousel</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <!-- TODO: Add poster image for better preview -->
+          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
+            <!-- Your video file here -->
+            <source src="static/videos/carousel1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <!-- TODO: Add poster image for better preview -->
+          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
+            <!-- Your video file here -->
+            <source src="static/videos/carousel2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <!-- TODO: Add poster image for better preview -->
+          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
+            <!-- Your video file here -->
+            <source src="static/videos/carousel3.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End video carousel -->
+
+
+
+
+
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <!-- TODO: Replace with your poster PDF -->
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section>
+<!--End paper poster -->
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{aagha2024intent,
+  title={Intent-Aware Layout Generation with Natural Language Control},
+  author={Aagha, Abdul Waheed},
+  journal={Conference on Computer Vision and Pattern Recognition},
+  year={2024},
+  url={https://aagha-ii.github.io/intent-aware-layout-generation}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

@@ -1,0 +1,41 @@
+---
+description: Demo interface and web application
+---
+
+# Demo Interface Guidelines
+
+## Gradio Application
+Main demo interface: [demo/app.py](mdc:demo/app.py)
+
+## Features
+- **Layout Generation**: Interactive layout generation with spatial guidance
+- **Background Generation**: AI-powered background creation
+- **Sample Images**: Pre-loaded samples in [demo/samples/](mdc:demo/samples/)
+- **Real-time Visualization**: Spatial guidance and bounding box visualization
+
+## Interface Components
+- **Input Controls**: Dataset selection, task type, encoder choice
+- **Spatial Guidance**: Saliency, Intent Map, or Both
+- **Visualization**: Final output, spatial guidance, bounding boxes
+- **Examples**: Pre-configured examples using sample images
+
+## Sample Images
+- **CGL Samples**: [demo/samples/cgl/](mdc:demo/samples/cgl/)
+- **PKL Samples**: [demo/samples/pkl/](mdc:demo/samples/pkl/)
+
+## Configuration Options
+- **Datasets**: pku, cgl
+- **Tasks**: uncond, c, cwh, complete
+- **Encoders**: vit, swin, convnext
+- **Spatial Guidance**: Saliency, Intent Map, Both
+
+## Running the Demo
+```bash
+cd demo
+python app.py
+```
+
+## Integration
+- Connects to main model pipeline
+- Uses same configuration system as training
+- Supports all model variants and datasets

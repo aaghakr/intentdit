@@ -1,0 +1,46 @@
+---
+description: Training and testing procedures
+---
+
+# Training and Testing Guidelines
+
+## Training Script
+Use [code/scripts/train.py](mdc:code/scripts/train.py) for model training:
+```bash
+python train.py --dataset pku --task uncond --gpuid 0
+```
+
+## Testing Script  
+Use [code/scripts/test.py](mdc:code/scripts/test.py) for model evaluation:
+```bash
+python test.py --dataset pku --anno unanno --task uncond --check_path <checkpoint_path>
+```
+
+## Configuration Files
+- **CGL Dataset**: [code/configs/cgl.yaml](mdc:code/configs/cgl.yaml)
+- **PKU Dataset**: [code/configs/pku.yaml](mdc:code/configs/pku.yaml)
+- **Test Configs**: Use `_test.yaml` variants for evaluation
+
+## Task Types
+- **uncond**: Unconditional generation
+- **c**: Conditional generation
+- **cwh**: Conditional with height
+- **complete**: Complete conditional generation
+- **refine**: Layout refinement
+
+## Datasets
+- **PKU**: PosterLayout dataset
+- **CGL**: Custom dataset
+
+## Model Parameters
+- **Architecture**: Transformer-based diffusion model
+- **Layers**: 4 transformer layers
+- **Heads**: 8 attention heads
+- **Model Dim**: 512
+- **Feature Dim**: 1024
+- **Max Elements**: 16
+
+## Evaluation Metrics
+- Use [code/utils/metric.py](mdc:code/utils/metric.py) for metric calculation
+- Visualizations in [code/utils/visualize.py](mdc:code/utils/visualize.py)
+- Results saved to [experiments/](mdc:experiments/) directory

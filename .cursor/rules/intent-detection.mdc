@@ -1,0 +1,35 @@
+---
+description: Intent detection and design intent models
+---
+
+# Intent Detection Guidelines
+
+## Intent Detection Module
+Located in [intent_detect/](mdc:intent_detect/) directory
+
+## Key Files
+- **Main Model**: [intent_detect/model.py](mdc:intent_detect/model.py)
+- **Training**: [intent_detect/main.py](mdc:intent_detect/main.py)
+- **Data Processing**: [intent_detect/dataloader.py](mdc:intent_detect/dataloader.py)
+- **Utilities**: [intent_detect/utils.py](mdc:intent_detect/utils.py)
+
+## Pre-trained Models
+- **PKU Model**: [intent_detect/pku_128_1e-06_none/ckpt/design_intent_pku_epoch100.pth](mdc:intent_detect/pku_128_1e-06_none/ckpt/design_intent_pku_epoch100.pth)
+- **CGL Model**: [intent_detect/cgl_128_1e-06_none/ckpt/design_intent_cgl_epoch35.pth](mdc:intent_detect/cgl_128_1e-06_none/ckpt/design_intent_cgl_epoch35.pth)
+- **Combined Model**: [intent_detect/all_128_1e-06_none/ckpt/design_intent_all_epoch25.pth](mdc:intent_detect/all_128_1e-06_none/ckpt/design_intent_all_epoch25.pth)
+
+## Training Scripts
+- **Training**: [intent_detect/train.sh](mdc:intent_detect/train.sh)
+- **Testing**: [intent_detect/test.sh](mdc:intent_detect/test.sh)
+- **Preprocessing**: [intent_detect/pp.sh](mdc:intent_detect/pp.sh)
+
+## Model Architecture
+- **Base**: UNet with MiT-B1 encoder
+- **Input**: RGB images
+- **Output**: Design intent maps
+- **Resolution**: 128x128 (configurable)
+
+## Integration
+- Intent maps used as spatial guidance in main model
+- Maps integrated into diffusion process
+- Supports both saliency and intent guidance
