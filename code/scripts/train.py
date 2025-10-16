@@ -31,7 +31,10 @@ def main(opt):
     cfg = load_config(f'configs/{opt.dataset}.yaml')
     cfg.experiment_name = opt.experiment_name
     cfg.task = opt.task
-
+    cfg.v_encoder = opt.v_encoder
+    print(f"Using {cfg.v_encoder} encoder") 
+    
+    
     training_set = train_dataset(cfg)
     training_dl = DataLoader(training_set, num_workers=cfg.num_workers, batch_size=cfg.train_batch_size, shuffle=True)
     if cfg.task == 'uncond':
@@ -52,7 +55,8 @@ def main(opt):
                                 seq_dim=cfg.num_class + 4,
                                 num_layers=cfg.n_layers,
                                 device=device,
-                                max_elem=cfg.max_elem,)
+                                max_elem=cfg.max_elem,
+                                v_encoder=cfg.v_encoder)
     total_num, trainable_num = get_parameter_number(diffusion_model.model)
     logger.info(f"trainable_num/total_num: %.2fM/%.2fM" % (trainable_num / 1e6, total_num / 1e6))
 

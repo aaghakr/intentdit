@@ -87,7 +87,9 @@ def main(opt):
     cfg = load_config(f'configs/{opt.dataset}_{opt.anno}_test.yaml')
     cfg.task = opt.task
     cfg.imgname_order_dir = os.path.join(cfg.imgname_order_dir, f'seed_{seed}_{opt.dataset}_{opt.anno}_test.pt')
-
+    cfg.v_encoder = opt.v_encoder
+    print(f"Using {cfg.v_encoder} encoder") 
+    
     if cfg.task == 'uncond':
         testing_set = test_uncond_dataset(cfg)
     else:
@@ -106,7 +108,8 @@ def main(opt):
                                 seq_dim=cfg.num_class + 4,
                                 num_layers=cfg.n_layers,
                                 device=device,
-                                max_elem=cfg.max_elem,)
+                                max_elem=cfg.max_elem,
+                                v_encoder=cfg.v_encoder)
     model_weights = torch.load(opt.check_path ,map_location=device)
     diffusion_model.model.load_state_dict(model_weights)
     diffusion_model.model.eval()

@@ -19,7 +19,8 @@ class Diffusion(nn.Module):
                  seq_dim=8,
                  num_layers=4,
                  device='cuda',
-                 max_elem=16):
+                 max_elem=16,
+                 v_encoder: str = 'vit'):
         super().__init__()
         self.device = device
         self.num_timesteps = num_timesteps
@@ -47,7 +48,7 @@ class Diffusion(nn.Module):
         self.model = LayoutModel(num_layers=num_layers, dim_seq=seq_dim,
                                  dim_model=dim_model, n_head=n_head,
                                  dim_feedforward=feature_dim, diffusion_steps=num_timesteps,
-                                 max_elem=max_elem, device=device).to(self.device)
+                                 max_elem=max_elem, v_encoder=v_encoder, device=device).to(self.device)
 
         self.ddim_num_steps = ddim_num_steps
         self.make_ddim_schedule(ddim_num_steps)

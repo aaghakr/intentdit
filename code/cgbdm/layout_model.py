@@ -2,6 +2,7 @@ from torch import nn
 from cgbdm.vit import ViT
 from cgbdm.module import LayoutModule, MLP, Q_former
 from typing import Optional
+from cgbdm.swin import Swin
 
 
 class LayoutModel(nn.Module):
@@ -13,7 +14,9 @@ class LayoutModel(nn.Module):
                  dim_feedforward: int = 1024,
                  diffusion_steps: int = 1000,
                  max_elem: int = 16,
-                 device: Optional[str] = None):
+                 v_encoder: str = 'vit',
+                 device: Optional[str] = None
+                 ):
         super(LayoutModel, self).__init__()
 
         common_params = {
@@ -26,8 +29,12 @@ class LayoutModel(nn.Module):
             'device': device
         }
 
-        self.img_encoder = ViT(image_size=[384,256],patch_size=32,channels=4,
-                               dim=512,depth=6,heads=8,mlp_dim=2048,dropout=0.1,emb_dropout=0.1).to(device)
+        if v_encoder == 'vit':
+            self.img_encoder = ViT(image_size=[384,256],patch_size=32,channels=4,
+                                   dim=512,depth=6,heads=8,mlp_dim=2048,dropout=0.1,emb_dropout=0.1).to(device)
+        elif v_encoder == 'swin':
+            self.img_encoder = Swin(image_size=[384,256],patch_size=32,channels=4,
+                                   dim=512,depth=6,heads=8,mlp_dim=2048,dropout=0.1,emb_dropout=0.1).to(device)
 
         self.layout_encoder = LayoutModule(
             num_layers=num_layers // 2,

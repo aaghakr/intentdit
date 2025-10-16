@@ -39,7 +39,9 @@ class TrainLoop:
 
         self.opt = optim.Adam(self.master_params, lr=self.initial_lr, weight_decay=0.0, betas=(0.9, 0.999), amsgrad=False, eps=1e-08)
         self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.opt, T_max=self.epochs)
-        self.writer = SummaryWriter()
+        
+        log_dir = f"runs/{self.cfg.dataset_cls}/{self.cfg.experiment_name}/{self.datetime}"
+        self.writer = SummaryWriter(log_dir=log_dir)
 
     def requires_grad(self, model, flag=False):
         """
