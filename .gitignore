@@ -7,3 +7,5 @@ runs/
 *.pth
 data
 experiments
+*.pyc
+__pycache__/
