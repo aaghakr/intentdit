@@ -53,85 +53,85 @@ python scripts/train.py --dataset pku --task uncond --v_encoder convnext --gpuid
 #### PKU Dataset - ViT Encoder
 ```bash
 # Original saliency only
-python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --experiment_name "pku_vit_sal"
+python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --experiment_name "pku_vit_saliency"
 
 # Intent only
 python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 1 --gpuid 0 --experiment_name "pku_vit_intent"
 
 # Sal + Intent
-python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 2 --gpuid 0 --experiment_name "pku_vit_sal_intent"
+python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 2 --gpuid 0 --experiment_name "pku_vit_both"
 
 # Sal + Text
-python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "pku_vit_sal_text"
+python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "pku_vit_saliency_text"
 
 # Intent + Text
 python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 1 --text_control --gpuid 0 --experiment_name "pku_vit_intent_text"
 
 # Sal + Intent + Text
-python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "pku_vit_sal_intent_text"
+python scripts/train.py --dataset pku --task uncond --v_encoder vit --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "pku_vit_both_text"
 ```
 
 #### PKU Dataset - Swin Encoder
 ```bash
 # Original saliency only
-python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 0 --gpuid 0 --experiment_name "pku_swin_sal"
+python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 0 --gpuid 0 --experiment_name "pku_swin_saliency"
 
 # Intent only
 python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 1 --gpuid 0 --experiment_name "pku_swin_intent"
 
 # Sal + Intent
-python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 2 --gpuid 0 --experiment_name "pku_swin_sal_intent"
+python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 2 --gpuid 0 --experiment_name "pku_swin_both"
 
 # Sal + Text
-python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "pku_swin_sal_text"
+python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "pku_swin_saliency_text"
 
 # Intent + Text
 python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 1 --text_control --gpuid 0 --experiment_name "pku_swin_intent_text"
 
 # Sal + Intent + Text
-python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "pku_swin_sal_intent_text"
+python scripts/train.py --dataset pku --task uncond --v_encoder swin --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "pku_swin_both_text"
 ```
 
 #### CGL Dataset - ViT Encoder
 ```bash
 # Original saliency only
-python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --experiment_name "cgl_vit_sal"
+python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --experiment_name "cgl_vit_saliency"
 
 # Intent only
 python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 1 --gpuid 0 --experiment_name "cgl_vit_intent"
 
 # Sal + Intent
-python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 2 --gpuid 0 --experiment_name "cgl_vit_sal_intent"
+python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 2 --gpuid 0 --experiment_name "cgl_vit_both"
 
 # Sal + Text
-python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "cgl_vit_sal_text"
+python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "cgl_vit_saliency_text"
 
 # Intent + Text
 python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 1 --text_control --gpuid 0 --experiment_name "cgl_vit_intent_text"
 
 # Sal + Intent + Text
-python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "cgl_vit_sal_intent_text"
+python scripts/train.py --dataset cgl --task uncond --v_encoder vit --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "cgl_vit_both_text"
 ```
 
 #### CGL Dataset - Swin Encoder
 ```bash
 # Original saliency only
-python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 0 --gpuid 0 --experiment_name "cgl_swin_sal"
+python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 0 --gpuid 0 --experiment_name "cgl_swin_saliency"
 
 # Intent only
 python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 1 --gpuid 0 --experiment_name "cgl_swin_intent"
 
 # Sal + Intent
-python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 2 --gpuid 0 --experiment_name "cgl_swin_sal_intent"
+python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 2 --gpuid 0 --experiment_name "cgl_swin_both"
 
 # Sal + Text
-python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "cgl_swin_sal_text"
+python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 0 --text_control --gpuid 0 --experiment_name "cgl_swin_saliency_text"
 
 # Intent + Text
 python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 1 --text_control --gpuid 0 --experiment_name "cgl_swin_intent_text"
 
 # Sal + Intent + Text
-python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "cgl_swin_sal_intent_text"
+python scripts/train.py --dataset cgl --task uncond --v_encoder swin --spatial_guidance 2 --text_control --gpuid 0 --experiment_name "cgl_swin_both_text"
 ```
 
 ## Testing Commands
@@ -272,15 +272,15 @@ Our experimental design systematically evaluates the contribution of each compon
 `{dataset}_{encoder}_{spatial_guidance}_{text_control}`
 
 Examples:
-- `pku_vit_sal` - PKU dataset, ViT encoder, saliency only
-- `cgl_swin_sal_intent_text` - CGL dataset, Swin encoder, saliency + intent + text
+- `pku_vit_saliency` - PKU dataset, ViT encoder, saliency only
+- `cgl_swin_both_text` - CGL dataset, Swin encoder, saliency + intent + text
 
 ### **Testing Commands:**
 Each training experiment requires corresponding testing commands with the same parameters:
 
 ```bash
 # Example: Test the PKU ViT saliency experiment
-python scripts/test.py --dataset pku --anno unanno --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --check_path "data/checkpoint/pku/pku_vit_sal/12_25_1430/Epoch400_cgbdm_weights.pth"
+python scripts/test.py --dataset pku --anno unanno --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --check_path "data/checkpoint/pku/pku_vit_saliency/12_25_1430/Epoch400_cgbdm_weights.pth"
 ```
 
 ## Notes
