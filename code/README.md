@@ -222,7 +222,7 @@ The project uses YAML configuration files located in `configs/`:
 ## Output Directories
 
 ### Training Outputs
-- **Checkpoints**: `data/checkpoint/{dataset}/{experiment_name}/{datetime}/`
+- **Checkpoints**: `data/checkpoints/{dataset}/{experiment_name}/{datetime}/`
 - **TensorBoard Logs**: `runs/`
 - **Image Name Orders**: `data/output/ptfile/image_name_order/`
 
@@ -237,10 +237,10 @@ The project uses YAML configuration files located in `configs/`:
 python scripts/train.py --dataset pku --task uncond --experiment_name "pku_baseline_v1" --gpuid 0
 
 # 2. Test the model
-python scripts/test.py --dataset pku --anno unanno --task uncond --check_path "data/checkpoint/pku/pku_baseline_v1/12_25_1430/Epoch400_cgbdm_weights.pth" --gpuid 0
+python scripts/test.py --dataset pku --anno unanno --task uncond --check_path "data/checkpoints/pku/pku_baseline_v1/12_25_1430/Epoch400_cgbdm_weights.pth" --gpuid 0
 
 # 3. Generate single image
-python scripts/run_single_image.py --render_style pku --image_path "path/to/test_image.jpg" --check_path "data/checkpoint/pku/pku_baseline_v1/12_25_1430/Epoch400_cgbdm_weights.pth" --gpuid 0
+python scripts/run_single_image.py --render_style pku --image_path "path/to/test_image.jpg" --check_path "data/checkpoints/pku/pku_baseline_v1/12_25_1430/Epoch400_cgbdm_weights.pth" --gpuid 0
 
 # 4. Launch demo
 cd demo && python app.py
@@ -280,7 +280,7 @@ Each training experiment requires corresponding testing commands with the same p
 
 ```bash
 # Example: Test the PKU ViT saliency experiment
-python scripts/test.py --dataset pku --anno unanno --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --check_path "data/checkpoint/pku/pku_vit_saliency/12_25_1430/Epoch400_cgbdm_weights.pth"
+python scripts/test.py --dataset pku --anno unanno --task uncond --v_encoder vit --spatial_guidance 0 --gpuid 0 --check_path "data/checkpoints/pku/pku_vit_saliency/12_25_1430/Epoch400_cgbdm_weights.pth"
 ```
 
 ## Notes

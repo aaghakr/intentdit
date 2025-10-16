@@ -108,7 +108,7 @@ class TrainLoop:
     def run_loop(self):
         logger.info(f"Training for {self.epochs} epochs...")
         base_check_dir = Path(self.cfg.base_check_dir)
-        experiment_name = self.cfg.get('experiment_name', 'default_experiment')
+        experiment_name =  self.cfg.experiment_name
         check_dir = base_check_dir / experiment_name / self.datetime
         check_dir.mkdir(parents=True, exist_ok=True)
 
