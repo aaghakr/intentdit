@@ -1,11 +1,70 @@
-model_weight/
-plot/
-tmp/
-runs/
-*.png
-*.txt
-*.pth
-data
-experiments
-*.pyc
+# Python
 __pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+.cursor/
+.agents/
+.codex/
+
+# Runtime data and model artifacts
+data/*
+!data/README.md
+experiments/*
+!experiments/README.md
+logs/*
+!logs/.gitkeep
+runs/
+checkpoints/
+outputs/
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.tfevents.*
+
+# User-study responses and rendered stimuli
+user_study/data/*
+!user_study/data/.gitkeep
+
+# Generated media and archives
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.npy
+*.npz
+*.pkl
+*.sqlite
+
+# LaTeX build products
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.synctex.gz
+!paper/fig/**/*.pdf
+
+# Local-only material: runtime logs, third-party papers, manuscripts and reviews,
+# dataset image copies used by the prompt-authoring app.
+/output/
+/code/output/
+/layout_related_papers/
+/submissions/
+/paper/
+/prompt_app/backups/
+/prompt_app/pku/
+/prompt_app/cgl/

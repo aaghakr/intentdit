@@ -1,10 +1,15 @@
+from __future__ import annotations
+
 import sys
+import re
+from difflib import get_close_matches
 
 import torch
 import os
 import copy
 import numpy as np
 import cv2
+import pandas as pd
 from PIL import Image, ImageDraw
 from math import log
 from einops import rearrange, reduce, repeat
@@ -13,6 +18,199 @@ from utils.util import box_cxcywh_to_xyxy
 from torch import Tensor
 from typing import Callable, Optional, Union, Any
 from torchvision.transforms.functional import to_tensor
+from utils.spatial_pla import spatial_pla_cal, spatial_prompt_records
+from utils.benchmark_metrics import (
+    aggregate_records,
+    content_records,
+    diagnostic_layout_fd,
+    geometry_records,
+    merge_records,
+)
+from cgbdm.text_spatial import parse_positions_from_prompt
+
+# Class index to name for TLA (Text-Layout Alignment). Must match prompt vocabulary.
+CLASS_INDEX_TO_NAME = {1: "Text", 2: "Logo", 3: "Underlay", 4: "Embellishment"}
+WORD_TO_NUM = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
+    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+    "a": 1, "an": 1, "single": 1,
+    # Common misspellings / variants from augmentation
+    "too": 2, "to": 2, "tree": 3, "for": 4, "fiv": 5, "fife": 5, "to": 2,
+}
+# Remove duplicate key "to" (keep last); "to" as number is ambiguous so prefer 2 only when context is clear
+if "to" in WORD_TO_NUM:
+    WORD_TO_NUM["to"] = 2
+
+# Synonyms and variants for class names (incl. from augmentation / paraphrasing).
+# Map lowercase token or phrase -> canonical class name.
+CLASS_SYNONYMS = {
+    "text": "Text", "texts": "Text", "text box": "Text", "text boxes": "Text",
+    "text field": "Text", "text fields": "Text", "caption": "Text", "captions": "Text",
+    "logo": "Logo", "logos": "Logo", "icon": "Logo", "icons": "Logo",
+    "brand mark": "Logo", "brand marks": "Logo",
+    "underlay": "Underlay", "underlays": "Underlay", "panel": "Underlay", "panels": "Underlay",
+    "background panel": "Underlay", "background panels": "Underlay",
+    "embellishment": "Embellishment", "embellishments": "Embellishment",
+    "decoration": "Embellishment", "decorations": "Embellishment",
+    "graphic element": "Embellishment", "graphic elements": "Embellishment",
+}
+# For fuzzy matching: all unique lowercase forms we accept
+_CLASS_TOKENS = list(set(CLASS_SYNONYMS.keys()))
+# Avoid matching "to" as number when it's part of "top" or "two"
+WORD_TO_NUM.pop("to", None)
+WORD_TO_NUM.pop("too", None)
+WORD_TO_NUM["two"] = 2
+
+
+def _normalize_token(t: str) -> str:
+    return (t or "").strip().lower()
+
+
+def _token_to_class(token: str, use_fuzzy: bool = True) -> Optional[str]:
+    """Map a single word or phrase to canonical class name. If use_fuzzy, allow close spelling matches."""
+    t = _normalize_token(token)
+    if not t:
+        return None
+    if t in CLASS_SYNONYMS:
+        return CLASS_SYNONYMS[t]
+    if use_fuzzy and len(t) > 2:
+        matches = get_close_matches(t, _CLASS_TOKENS, n=1, cutoff=0.75)
+        if matches:
+            return CLASS_SYNONYMS.get(matches[0])
+    return None
+
+
+def _parse_prompt_counts(prompt: str, use_fuzzy: bool = True) -> dict[str, int]:
+    """
+    Parse a prompt string into expected counts per class. Tolerates:
+    - Synonyms (e.g. icon, text box, panel) and paraphrases from augmentation.
+    - Number words and digits; 'a'/'an'/'single' as 1.
+    - Small spelling errors via fuzzy matching when use_fuzzy=True.
+    """
+    prompt = (prompt or "").strip()
+    counts = {name: 0 for name in CLASS_INDEX_TO_NAME.values()}
+    if not prompt:
+        return counts
+
+    # Normalize and split into words (keep boundaries for phrase matching)
+    prompt_lower = prompt.lower()
+    words = re.findall(r"\b[\w']+\b", prompt_lower)
+
+    i = 0
+    while i < len(words):
+        w = words[i]
+        n_val = None
+        if w.isdigit():
+            n_val = int(w)
+        elif w in WORD_TO_NUM:
+            n_val = WORD_TO_NUM[w]
+        if n_val is not None and i + 1 < len(words):
+            # Next token(s) as class: single word or two-word phrase
+            c = _token_to_class(words[i + 1], use_fuzzy)
+            if c is None and i + 2 <= len(words):
+                c = _token_to_class(" ".join(words[i + 1 : i + 3]), use_fuzzy)
+            if c is not None:
+                counts[c] += n_val
+                # Skip number + class token(s). If class was two-word phrase, skip one more.
+                # Exact match only: a fuzzy match would treat e.g. "texts 1" as
+                # "texts" and swallow the count that starts the next clause.
+                if CLASS_SYNONYMS.get(" ".join(words[i + 1 : i + 3])) == c:
+                    i += 3
+                else:
+                    i += 2
+                continue
+        i += 1
+
+    # Free-form prompts often omit explicit counts but attach a class phrase to
+    # a spatial location, e.g. "large title text at top-center" or "small logo
+    # at bottom-left".  The text-spatial parser can recover these assignments;
+    # use them as a lower-bound count without double-counting stricter
+    # count-class matches already found above.
+    for class_name, positions in parse_positions_from_prompt(prompt).items():
+        if class_name in counts:
+            counts[class_name] = max(counts[class_name], len(positions))
+
+    return counts
+
+
+def tla_cal(img_names, clses, cfg) -> float:
+    """
+    Text-Layout Alignment (TLA): measures how well generated layout counts match
+    the counts described in the text prompt. Uses prompt CSV at cfg.paths.test.all_prompts;
+    column 'prompt' or 'text_prompt' per poster_path. Higher is better (0-1).
+    """
+    if not getattr(cfg, "text_control", False):
+        return float("nan")
+    all_prompts_path = getattr(getattr(cfg, "paths", None), "test", None)
+    if all_prompts_path is None or not hasattr(all_prompts_path, "all_prompts"):
+        return float("nan")
+    path = getattr(all_prompts_path, "all_prompts", None)
+    if not path or not os.path.isfile(path):
+        logger.log("TLA: all_prompts CSV not found, skipping TLA.")
+        return float("nan")
+
+    try:
+        df = pd.read_csv(path)
+    except Exception as e:
+        logger.log(f"TLA: failed to load prompts CSV: {e}")
+        return float("nan")
+
+    prompt_col = "text_prompt" if "text_prompt" in df.columns else "prompt"
+    if prompt_col not in df.columns:
+        logger.log("TLA: no prompt/text_prompt column in CSV, skipping TLA.")
+        return float("nan")
+
+    # First prompt per image (poster_path = image filename)
+    poster_to_prompt = df.groupby("poster_path")[prompt_col].first().to_dict()
+    num_class = getattr(cfg, "num_class", 4)
+
+    scores = []
+    clses_np = clses.cpu().numpy()  # (N, max_elem, 1) or (N, max_elem)
+    if clses_np.ndim == 3:
+        clses_np = clses_np.squeeze(-1)
+
+    for idx, name in enumerate(img_names):
+        # Match image name (with or without path)
+        key = name if name in poster_to_prompt else os.path.basename(name)
+        prompt = poster_to_prompt.get(key)
+        if prompt is None or not str(prompt).strip():
+            # Missing/blank prompts are not interpretable requests and should
+            # not enter the prompt-alignment denominator.
+            continue
+        prompt = str(prompt)
+        expected = _parse_prompt_counts(prompt)
+        # Predicted counts from layout (class indices 1..num_class)
+        row = clses_np[idx]
+        valid = row > 0
+        pred_counts = {}
+        for c in range(1, num_class + 1):
+            cname = CLASS_INDEX_TO_NAME.get(c, f"Class{c}")
+            pred_counts[cname] = int(np.sum((row == c) & valid))
+        for cname in CLASS_INDEX_TO_NAME.values():
+            if cname not in pred_counts:
+                pred_counts[cname] = 0
+
+        total_exp = sum(expected.values())
+        total_pred = sum(pred_counts.values())
+        if total_exp == 0 and total_pred == 0:
+            scores.append(1.0)
+            continue
+        if total_exp == 0:
+            # A parsed zero-element request must count as a failure when the
+            # model generates anything.  Earlier code skipped this case, which
+            # could inflate PLA on zero-request prompts.
+            scores.append(0.0)
+            continue
+        if total_pred == 0:
+            scores.append(0.0)
+            continue
+        # 1 - normalized L1 over counts; 1 when perfect match
+        diff = sum(abs(expected.get(k, 0) - pred_counts.get(k, 0)) for k in CLASS_INDEX_TO_NAME.values())
+        denom = total_exp + total_pred
+        scores.append(1.0 - (diff / denom) if denom > 0 else 0.0)
+
+    return float(np.mean(scores)) if scores else float("nan")
+
 
 def _mean(values: list[float]) -> Optional[float]:
     if len(values) == 0:
@@ -353,30 +551,105 @@ def unreadability_cal(img_names, clses, boxes, cfg):
 
     return np.mean(np.array(metrics))
 
-def metric(img_names, test_output, cfg):
-    logger.log("Calculating metrics...")
-    clses, boxes = test_output[:, :, :1], test_output[:, :, 1:]
-    boxes = torch.clamp(box_cxcywh_to_xyxy(boxes), 0, 1)
+def _prompt_count_records(img_names, clses, cfg):
+    """Per-image count precision/recall/F1 against the active prompt file."""
+    prompt_path = getattr(getattr(cfg.paths, "test", None), "all_prompts", "")
+    if not prompt_path or not os.path.isfile(prompt_path):
+        return []
+    frame = pd.read_csv(prompt_path)
+    prompt_col = "text_prompt" if "text_prompt" in frame.columns else "prompt"
+    if "poster_path" not in frame.columns or prompt_col not in frame.columns:
+        return []
+    prompts = frame.groupby("poster_path")[prompt_col].first().to_dict()
+    class_array = clses.squeeze(-1).detach().cpu().numpy()
+    records = []
+    for image_name, predicted in zip(img_names, class_array):
+        key = image_name if image_name in prompts else os.path.basename(str(image_name))
+        prompt = prompts.get(key)
+        if prompt is None or not str(prompt).strip():
+            continue
+        expected = _parse_prompt_counts(str(prompt))
+        expected_total = sum(expected.values())
+        pred_counts = {
+            name: int(np.sum(predicted == class_id))
+            for class_id, name in CLASS_INDEX_TO_NAME.items()
+            if class_id < int(cfg.num_class)
+        }
+        predicted_total = sum(pred_counts.values())
+        true_positive = sum(
+            min(expected.get(name, 0), pred_counts.get(name, 0))
+            for name in CLASS_INDEX_TO_NAME.values()
+        )
+        precision = true_positive / predicted_total if predicted_total else (
+            1.0 if expected_total == 0 else 0.0
+        )
+        recall = true_positive / expected_total if expected_total else (
+            1.0 if predicted_total == 0 else 0.0
+        )
+        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+        diff = sum(
+            abs(expected.get(name, 0) - pred_counts.get(name, 0))
+            for name in CLASS_INDEX_TO_NAME.values()
+        )
+        denominator = expected_total + predicted_total
+        similarity = 1.0 - diff / denominator if denominator else 1.0
+        exact_count_match = all(
+            expected.get(name, 0) == pred_counts.get(name, 0)
+            for name in CLASS_INDEX_TO_NAME.values()
+        )
+        records.append(
+            {
+                "image": os.path.basename(str(image_name)),
+                "count_precision": float(precision),
+                "count_recall": float(recall),
+                "count_f1": float(f1),
+                "pla_count": float(similarity),
+                "exact_count_match": float(exact_count_match),
+            }
+        )
+    return records
 
-    metrics = {
-        'val': validity_cal(clses, boxes),
-    }
-    clses = getRidOfInvalid(clses, boxes)
-    metrics['ove'] = overlap_cal(clses, boxes)
-    metrics['undl'], metrics['unds'] = underlay_cal(clses, boxes)
 
-    boxes[:, :, ::2] *= cfg.width
-    boxes[:, :, 1::2] *= cfg.height
-    boxes = boxes.round().int()
+def metric(img_names, test_output, cfg, ground_truth=None, return_records=False):
+    """Compute aggregate and optionally per-image benchmark measurements."""
+    logger.log("Calculating protocol-aware metrics...")
+    geometry = geometry_records(img_names, test_output, ground_truth=ground_truth)
+    content = content_records(img_names, test_output, cfg)
+    records = merge_records(geometry, content)
+    clses = test_output[:, :, :1]
 
-    for name, func in [
-        ('occ', occlusion_cal),
-        # ('uti', utilization_cal),
-        ('rea', unreadability_cal)
-    ]:
-        metrics[name] = func(img_names, clses, boxes, cfg)
+    if getattr(cfg, 'text_control', False):
+        count_records = _prompt_count_records(img_names, clses, cfg)
+        if count_records:
+            records = merge_records(records, count_records)
+
+    # Backward-compatible alias. The explicit name prevents it being mistaken for
+    # complete natural-language alignment.
+    if getattr(cfg, 'text_control', False):
+        if getattr(cfg, 'spatial_metrics', False):
+            boxes = torch.clamp(
+                box_cxcywh_to_xyxy(test_output[:, :, 1:]), 0.0, 1.0
+            )
+            spatial_records = spatial_prompt_records(img_names, clses, boxes, cfg)
+            if spatial_records:
+                records = merge_records(records, spatial_records)
+
+    metrics = aggregate_records(records)
+    if ground_truth is not None and len(ground_truth) >= 2:
+        metrics['hfd'] = diagnostic_layout_fd(
+            test_output, ground_truth, int(cfg.num_class)
+        )
+    if getattr(cfg, 'text_control', False):
+        tla_val = tla_cal(img_names, clses, cfg)
+        if not np.isnan(tla_val):
+            metrics['tla'] = tla_val
+            metrics['pla_count'] = tla_val
+        if getattr(cfg, 'spatial_metrics', False):
+            metrics.update(spatial_pla_cal(img_names, clses, boxes, cfg))
 
     for key, value in metrics.items():
         logger.log(f"{key}:{value:.6f}")
 
+    if return_records:
+        return metrics, records
     return metrics

@@ -195,7 +195,8 @@ def make_ddim_sampling_parameters(alphacums, ddim_timesteps, eta):
 
 
 def ddim_sample_loop(model, image, sal_box, timesteps, ddim_alphas, ddim_alphas_prev,
-                     ddim_sigmas, seq_len=16, seq_dim=8):
+                     ddim_sigmas, seq_len=16, seq_dim=8, intent_box=None, text_features=None,
+                     text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
     device = next(model.parameters()).device
     batch_size = image.shape[0]
     b_t = 1  * torch.randn_like(torch.zeros([batch_size, seq_len, seq_dim])).to(device)
@@ -204,12 +205,15 @@ def ddim_sample_loop(model, image, sal_box, timesteps, ddim_alphas, ddim_alphas_
     time_range = np.flip(timesteps)
 
     total_steps = timesteps.shape[0]
-    # print(f"Running DDIM Sampling with {total_steps} timesteps")
     for i, step in enumerate(time_range):
         index = total_steps - i - 1
         t = torch.full((batch_size,), step, device=device, dtype=torch.long)
         b_t, pred_y0 = ddim_sample_step(model, b_t, image, sal_box, t, index, ddim_alphas,
-                                        ddim_alphas_prev, ddim_sigmas)
+                                        ddim_alphas_prev, ddim_sigmas, intent_box=intent_box,
+                                        text_features=text_features,
+                                        text_spatial_boxes=text_spatial_boxes,
+                                        text_spatial_mask=text_spatial_mask,
+                                        use_text_spatial=use_text_spatial)
         intermediates['y_inter'].append(b_t)
         intermediates['pred_y0'].append(pred_y0)
     return b_t, intermediates
@@ -217,7 +221,8 @@ def ddim_sample_loop(model, image, sal_box, timesteps, ddim_alphas, ddim_alphas_
 
 def ddim_cond_sample_loop(model, real_layout, image, sal_box, timesteps,
                           ddim_alphas, ddim_alphas_prev, ddim_sigmas,
-                          stochastic=True, cond='c', ratio=0.1):
+                          stochastic=True, cond='c', ratio=0.1, intent_box=None, text_features=None,
+                          text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
     device = next(model.parameters()).device
     batch_size, seq_len, seq_dim = real_layout.shape
     num_class = seq_dim - 4
@@ -247,9 +252,12 @@ def ddim_cond_sample_loop(model, real_layout, image, sal_box, timesteps,
     for i, step in enumerate(time_range):
         index = total_steps - i - 1
         t = torch.full((batch_size,), step, device=device, dtype=torch.long)
-        # l_t[fix_mask] = real_layout[fix_mask]
         l_t, pred_y0, = ddim_sample_step(model, l_t, image, sal_box, t, index, ddim_alphas,
-                                               ddim_alphas_prev, ddim_sigmas)
+                                               ddim_alphas_prev, ddim_sigmas, intent_box=intent_box,
+                                               text_features=text_features,
+                                               text_spatial_boxes=text_spatial_boxes,
+                                               text_spatial_mask=text_spatial_mask,
+                                               use_text_spatial=use_text_spatial)
         l_t[fix_mask] = real_layout[fix_mask]
 
         intermediates['y_inter'].append(l_t)
@@ -279,10 +287,16 @@ def ddim_refine_sample_loop(model, noisy_layout, image, sal_box, timesteps, ddim
     return l_t, intermediates
 
 
-def ddim_sample_step(model, l_t, image, sal_box, t, index, ddim_alphas, ddim_alphas_prev, ddim_sigmas):
+def ddim_sample_step(model, l_t, image, sal_box, t, index, ddim_alphas, ddim_alphas_prev, ddim_sigmas,
+                     intent_box=None, text_features=None,
+                     text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
     device = next(model.parameters()).device
 
-    e_t = model(l_t, image, sal_box, timestep=t)
+    e_t = model(l_t, image, sal_box, timestep=t, intent_box=intent_box,
+                text_features=text_features,
+                text_spatial_boxes=text_spatial_boxes,
+                text_spatial_mask=text_spatial_mask,
+                use_text_spatial=use_text_spatial)
     e_t = e_t.to(device).detach()
 
     # cfg

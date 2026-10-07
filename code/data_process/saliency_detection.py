@@ -1,5 +1,6 @@
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -21,8 +22,13 @@ from tqdm import tqdm
 logger = logging.getLogger(__name__)
 
 
-WEIGHT_ROOT = Path("/media/erc/GPU/projects/aagha-ii/intent_aware_layout_generation/datamodel_weight/saliency_detection")
-assert WEIGHT_ROOT.exists(), f"{str(WEIGHT_ROOT.resolve())} does not exist."
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+WEIGHT_ROOT = Path(
+    os.environ.get(
+        "INTENTDIT_SALIENCY_WEIGHT_ROOT",
+        PROJECT_ROOT / "data" / "model_weights" / "saliency_detection",
+    )
+)
 
 
 def main() -> None:
@@ -112,6 +118,11 @@ class _SaliencyTester:  # type: ignore
         self._ckpt_path: str = ""  # to be overwritten
 
     def setup_model(self, model: nn.Module) -> None:
+        if not Path(self._ckpt_path).is_file():
+            raise FileNotFoundError(
+                f"Missing saliency checkpoint: {self._ckpt_path}. "
+                "See docs/DATA.md or set INTENTDIT_SALIENCY_WEIGHT_ROOT."
+            )
         model.load_state_dict(torch.load(self._ckpt_path, map_location="cpu"))
         model.eval()
         if torch.cuda.is_available():

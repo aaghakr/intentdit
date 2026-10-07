@@ -30,7 +30,7 @@ def train(model, args, loader, optimizer, criterion):
             loss += con_loss
         loss.backward()
         optimizer.step()
-        
+
         with torch.no_grad():
             mse_loss = mse_loss.clone().detach()
             if args.local_rank >= 0:
@@ -66,7 +66,7 @@ def train(model, args, loader, optimizer, criterion):
 def test(model, args, loader, canvas_df, dont_save_for_speed_test=False):
     model.eval()
     total_time = 0
-    
+
     with torch.no_grad():
         predms = []
         cvidc = []
@@ -93,20 +93,20 @@ def test(model, args, loader, canvas_df, dont_save_for_speed_test=False):
                     save_maps(args, predms, canvas_df, cvidc)
 
         if args.vis_preview:
-            predms = distributed_concat(torch.concat(predms, dim=0), 
+            predms = distributed_concat(torch.concat(predms, dim=0),
                                             len(canvas_df))
             cvidc = distributed_concat(torch.concat(cvidc, dim=0),
                                             len(canvas_df))
-        
+
         if args.local_rank <= 0:
             if args.vis_preview:
                 visualize(args, predms, canvas_df, cvidc)
             if not args.infer:
                 root = os.path.join(args.exp_name, "ckpt")
                 torch.save(model.module.state_dict(), os.path.join(root, f"epoch{args.current_epoch}.pth"))
-                
+
     return total_time
-                
+
 def get_features(model, args, loader, canvas_df):
     model.eval()
     with torch.no_grad():
@@ -119,7 +119,7 @@ def get_features(model, args, loader, canvas_df):
             cvidx = cvidx.to(args.device)
             features.append(model(canvas))
             cvidc.append(cvidx)
-            
+
         features = torch.concat(features, dim=0)
         cvidc = torch.concat(cvidc, dim=0)
         print(features.shape, cvidc.shape)

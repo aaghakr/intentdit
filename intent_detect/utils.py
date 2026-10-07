@@ -35,7 +35,7 @@ def get_args():
     parser.add_argument("--dataset", default='all', type=str, choices=['pku', 'cgl', 'all'])
     parser.add_argument("--infer_csv", default='test', type=str)
     parser.add_argument("--extract_split", default='test', type=str)
-    
+
     # hyperpm
     parser.add_argument("--epoch", default=51, type=int)
     parser.add_argument("--batch_size", default=128, type=int)
@@ -52,21 +52,21 @@ def get_args():
     parser.add_argument("--infer", action='store_true')
     parser.add_argument("--extract", action='store_true')
 
-    
+
     args = parser.parse_args()
 
     try:
         args.local_rank = int(os.environ["LOCAL_RANK"])
     except:
         args.local_rank = -1
-    
+
     if args.extract and not args.infer:
         raise ValueError("extract mode only works in inference mode.")
     if args.extract and args.extract_split != args.infer_csv:
         if args.extract_split == 'test' or args.infer_csv == 'test':
             raise ValueError("extract_split and infer_csv should be the same.")
-        
-    
+
+
     if args.infer:
         if args.infer_ckpt == '':
             raise ValueError("No model weights provided.")

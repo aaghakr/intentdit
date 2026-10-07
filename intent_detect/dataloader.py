@@ -8,7 +8,7 @@ from pandas import read_csv
 class closedm(Dataset):
     def __init__(self, args, preprocess_fn=None, split="train"):
         assert preprocess_fn, "No preprocess functions provided."
-        
+
         if args.dataset == "all":
             if split == "test":
                 self.canvas_dir = os.path.join(args.dataset_root, "{}", "image", args.infer_csv, "input")
@@ -47,13 +47,13 @@ class closedm(Dataset):
         self.df = self.df.drop_duplicates(subset=['poster_path']).reset_index(drop=True)
         if split == "test" and args.vis_preview:
             self.df = self.df.iloc[:32]
-        
+
         self.use_all = True if args.dataset == "all" else False
         self.train = True if split == "train" else False
-        
+
     def __len__(self):
         return len(self.df)
-    
+
     def __getitem__(self, idx):
         entry = self.df.iloc[idx]
         if self.use_all:
@@ -65,7 +65,7 @@ class closedm(Dataset):
             if self.train:
                 closedm = cv2.imread(os.path.join(self.closedm_dir, entry.poster_path), 0)
             canvas_path = os.path.join(self.canvas_dir, entry.poster_path)
-            
+
         canvas = cv2.imread(canvas_path)
         canvas = cv2.cvtColor(canvas, cv2.COLOR_BGR2RGB)
 

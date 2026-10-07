@@ -324,11 +324,11 @@ class Swin(nn.Module):
         # Adjust window size to fit the input resolution
         H, W = self.input_resolution
         effective_window_size = min(window_size, H, W)
-        
+
         # Ensure window size divides evenly into the resolution
         while effective_window_size > 1 and (H % effective_window_size != 0 or W % effective_window_size != 0):
             effective_window_size -= 1
-        
+
         for i in range(depth):
             shift_size = 0 if (i % 2 == 0) else effective_window_size // 2
             self.layers.append(SwinBlock(
@@ -360,21 +360,21 @@ class Swin(nn.Module):
         # We need to handle the CLS token separately
         cls_token = x[:, :1, :]  # [B, 1, C]
         patch_tokens = x[:, 1:, :]  # [B, H*W, C]
-        
+
         # Reshape patch tokens to spatial format
         H, W = self.input_resolution
         patch_tokens = patch_tokens.view(b, H, W, -1)  # [B, H, W, C]
-        
+
         # Apply Swin blocks to patch tokens
         for blk in self.layers:
             # SwinBlock expects [B, H*W, C] format
             patch_tokens_flat = patch_tokens.view(b, H * W, -1)
             patch_tokens_flat = blk(patch_tokens_flat)
             patch_tokens = patch_tokens_flat.view(b, H, W, -1)
-        
+
         # Reshape back to sequence format
         patch_tokens = patch_tokens.view(b, H * W, -1)  # [B, H*W, C]
-        
+
         # Concatenate CLS token back
         x = torch.cat((cls_token, patch_tokens), dim=1)  # [B, H*W+1, C]
 

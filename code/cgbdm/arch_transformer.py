@@ -23,13 +23,13 @@ class LayerNorm(nn.LayerNorm):
         orig_type = x.dtype
         x = F.layer_norm(x, self.normalized_shape, self.weight, self.bias, self.eps)
         return x.to(orig_type)
-    
+
 
 class QuickGELU(nn.Module):
     # NOTE This is slower than nn.GELU or nn.SiLU and uses more GPU memory
     def forward(self, x: torch.Tensor):
         return x * torch.sigmoid(1.702 * x)
-    
+
 
 class LayerScale(nn.Module):
     def __init__(self, dim, init_values=1e-5, inplace=False):
@@ -155,7 +155,7 @@ class Attention(nn.Module):
         x = self.out_proj(x)
         x = self.out_drop(x)
         return x
-    
+
 
 class ResidualAttentionBlock(nn.Module):
     def __init__(
@@ -213,7 +213,7 @@ class ResidualAttentionBlock(nn.Module):
         x = q_x + self.ls_1(self.attention(q_x=self.ln_1(q_x), k_x=k_x, v_x=v_x, attn_mask=attn_mask))
         x = x + self.ls_2(self.mlp(self.ln_2(x)))
         return x
-    
+
 
 class Transformer(nn.Module):
     def __init__(

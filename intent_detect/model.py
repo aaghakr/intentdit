@@ -3,11 +3,11 @@ import torch.nn as nn
 import segmentation_models_pytorch as smp
 
 class design_intent_detector(nn.Module):
-    def __init__(self, act='Sigmoid', action='forward'):
+    def __init__(self, act='Sigmoid', action='forward', encoder_weights='imagenet'):
         super(design_intent_detector, self).__init__()
         self.model = smp.Unet(
             encoder_name="mit_b1",
-            encoder_weights="imagenet",
+            encoder_weights=encoder_weights,
             in_channels=3,
             classes=1,
         )
@@ -19,14 +19,14 @@ class design_intent_detector(nn.Module):
             self.act = nn.Identity()
         else:
             raise NotImplementedError(act)
-        
+
         if action == 'forward':
             self.forward = self.feed_forward
         elif action == 'extract':
             self.forward = self.encode_feature
         else:
             raise NotImplementedError(action)
-    
+
     def encode_feature(self, x):
         return self.model.encoder(x)[-1] # B, 512, 7, 7
 

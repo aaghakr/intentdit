@@ -35,7 +35,7 @@ def getRegions(design_intent_map, pad, kernel_n, draw=False, draw_img=None):
         return Image.fromarray(binary), draw_img, bbox
     else:
         return None, None, bbox
-        
+
 def getDesignIntentBox(dm_root, csv_dir, split, subsplit=None, pad=False, kernel_n=49, preview=10, canvas_root=None):
     if preview > 0:
         assert canvas_root, "canvas_root is required to preview."
@@ -49,7 +49,7 @@ def getDesignIntentBox(dm_root, csv_dir, split, subsplit=None, pad=False, kernel
     df = df.drop_duplicates(subset=['poster_path']).reset_index(drop=True)
 
     print(f"Start inferencing {len(df)} samples of {split + str(subsplit).replace('None', '')}.")
-    
+
     if 'dataset' not in df.columns:
         if 'pku' in csv_dir:
             df['dataset'] = 'pku'
@@ -57,7 +57,7 @@ def getDesignIntentBox(dm_root, csv_dir, split, subsplit=None, pad=False, kernel
             df['dataset'] = 'cgl'
         else:
             raise ValueError("Dataset not found.")
-    
+
     save_bbox = []
     for i in range(len(df)):
         entry = df.iloc[i]
@@ -102,22 +102,22 @@ def get_args():
     parser.add_argument('--pad', type=bool, default=False)
     parser.add_argument('--kernel_n', type=int, default=37)
     args = parser.parse_args()
-    
+
     assert args.dm_root or args.infer_ckpt, "dm_root or infer_ckpt is required."
     assert not(args.dm_root and args.infer_ckpt), "Only one of dm_root or infer_ckpt is required, get dm_root: {} and infer_ckpt: {}.".format(args.dm_root, args.infer_ckpt)
-    
+
     if args.infer_ckpt:
         args.dm_root = args.infer_ckpt.replace('ckpt', 'result').replace('.pth', '')
-        
+
     args.csv_dir = os.path.join(args.dataset_root, args.dataset, 'annotation')
     return args
 
 def main():
     args = get_args()
-    
+
     # test
     _ = getDesignIntentBox(
-        args.dm_root, 
+        args.dm_root,
         args.csv_dir,
         split='test',
         pad=args.pad,
@@ -127,7 +127,7 @@ def main():
 
     # valid
     _ = getDesignIntentBox(
-        args.dm_root, 
+        args.dm_root,
         args.csv_dir,
         split='train',
         subsplit='valid',
@@ -138,7 +138,7 @@ def main():
 
     # train
     _ = getDesignIntentBox(
-        args.dm_root, 
+        args.dm_root,
         args.csv_dir,
         split='train',
         subsplit='train',
@@ -146,7 +146,6 @@ def main():
         kernel_n=args.kernel_n,
         preview=0
     )
-    
+
 if __name__ == '__main__':
     main()
-    

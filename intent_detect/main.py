@@ -19,7 +19,7 @@ def main():
             print(f"Experiment name: {args.exp_name}, ckpt name: {args.infer_ckpt}")
         else:
             print(f"Experiment name: {args.exp_name}")
-        
+
 
     # ddp
     if args.local_rank >= 0:
@@ -58,7 +58,7 @@ def main():
     # training-related
     optimizer = optim.AdamW(params=model_divs.parameters(), lr=args.learning_rate)
     criterion = torch.nn.MSELoss().to(args.device)
-    
+
     os.makedirs(os.path.join(args.exp_name, "ckpt"), exist_ok=True)
     if args.vis_preview:
         os.makedirs(os.path.join(args.exp_name, "vis_preview"), exist_ok=True)
@@ -72,7 +72,7 @@ def main():
             print(f"Inferencing {len(test_canvas_df)} samples.")
         args.save_dir = os.path.join(args.exp_name, "result", os.path.split(args.infer_ckpt)[-1][:-4], args.infer_csv)
         os.makedirs(args.save_dir, exist_ok=True)
-    
+
     # run
     if args.infer is False:
         for e in range(args.epoch):

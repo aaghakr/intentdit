@@ -193,6 +193,8 @@ class Block(nn.Module):
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm3 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm4 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm5 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm6 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.dropout1 = nn.Dropout(dropout)
         self.dropout2 = nn.Dropout(dropout)
         self.dropout3 = nn.Dropout(dropout)
@@ -208,9 +210,14 @@ class Block(nn.Module):
         img: Tensor,
         cgb_w: Tensor,
         salbox_encode: Tensor,
+        intent_encode: Tensor = None,
+        text_encode: Tensor = None,
         src_mask: Optional[Tensor] = None,
         src_key_padding_mask: Optional[Tensor] = None,
         timestep: Tensor = None,
+        text_key_padding_mask: Optional[Tensor] = None,
+        spatial_key_padding_mask: Optional[Tensor] = None,
+        spatial_condition_active: Optional[Tensor] = None,
     ) -> Tensor:
         x = src
 
@@ -229,12 +236,33 @@ class Block(nn.Module):
 
         if salbox_encode is not None:
             x = self.norm3(x)
-            # if cgb_w is not None:
-            #     x = x + cgb_w * self._ca_block(x, detect_encode, detect_encode, None, src_key_padding_mask)
-            # else:
             x = x + self._ca_block(x, salbox_encode, salbox_encode, None, src_key_padding_mask)
 
-        x = x + self._ff_block(self.norm4(x))
+        if intent_encode is not None:
+            spatial_input = self.norm4(x)
+            spatial_update = self._ca_block(
+                spatial_input,
+                intent_encode,
+                intent_encode,
+                None,
+                spatial_key_padding_mask,
+            )
+            if spatial_condition_active is not None:
+                spatial_update = spatial_update * spatial_condition_active[
+                    :, None, None
+                ].to(spatial_update.dtype)
+                spatial_output = spatial_input + spatial_update
+                x = torch.where(
+                    spatial_condition_active[:, None, None], spatial_output, x
+                )
+            else:
+                x = spatial_input + spatial_update
+
+        if text_encode is not None:
+            x = self.norm5(x)
+            x = x + self._ca_block(x, text_encode, text_encode, None, text_key_padding_mask)
+
+        x = x + self._ff_block(self.norm6(x))
         return x
 
     # self-attention block
@@ -309,7 +337,12 @@ class LayoutModule(nn.Module):
         img_encode,
         cgb_w,
         salbox_encode,
+        intent_encode=None,
+        text_encode=None,
         timestep: Tensor = None,
+        text_key_padding_mask=None,
+        spatial_key_padding_mask=None,
+        spatial_condition_active=None,
     ) -> Tensor:
 
         if self.if_encoder:
@@ -326,9 +359,14 @@ class LayoutModule(nn.Module):
                 img_encode,
                 cgb_w,
                 salbox_encode,
+                intent_encode,
+                text_encode,
                 src_mask=None,
                 src_key_padding_mask=None,
                 timestep=timestep,
+                text_key_padding_mask=text_key_padding_mask,
+                spatial_key_padding_mask=spatial_key_padding_mask,
+                spatial_condition_active=spatial_condition_active,
             )
             if i < self.num_layers - 1:
                 output = F.softplus(output)
@@ -336,4 +374,3 @@ class LayoutModule(nn.Module):
         if not self.if_encoder:
             output = self.mlp(output)
         return output
-

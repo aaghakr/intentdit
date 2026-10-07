@@ -20,10 +20,22 @@ class Diffusion(nn.Module):
                  num_layers=4,
                  device='cuda',
                  max_elem=16,
-                 v_encoder: str = 'vit'):
+                 v_encoder: str = 'vit',
+                 spatial_guidance: int = 0, # 0: saliency only, 1: intent only, 2: both
+                 text_control: bool = False,
+                 text_conditioning_mode: str = 'token',
+                 text_guidance_scale: float = 1.0,
+                 ddim_schedule: str = 'cosine',
+                 ):
         super().__init__()
         self.device = device
         self.num_timesteps = num_timesteps
+        if ddim_schedule not in {'training', 'cosine', 'linear'}:
+            raise ValueError(
+                "ddim_schedule must be one of {'training', 'cosine', 'linear'}; "
+                f"got {ddim_schedule!r}"
+            )
+        self.ddim_schedule = ddim_schedule
         betas = make_beta_schedule(schedule='cosine', num_timesteps=self.num_timesteps)
         betas = self.betas = betas.float().to(self.device)
         self.betas_sqrt = torch.sqrt(betas)
@@ -45,23 +57,45 @@ class Diffusion(nn.Module):
         self.seq_len = max_elem
         self.num_class = seq_dim - 4
 
+        self.spatial_guidance = spatial_guidance
+        self.text_control = text_control
         self.model = LayoutModel(num_layers=num_layers, dim_seq=seq_dim,
                                  dim_model=dim_model, n_head=n_head,
                                  dim_feedforward=feature_dim, diffusion_steps=num_timesteps,
-                                 max_elem=max_elem, v_encoder=v_encoder, device=device).to(self.device)
+                                 max_elem=max_elem, v_encoder=v_encoder, spatial_guidance=spatial_guidance,
+                                 text_control=text_control,
+                                 text_conditioning_mode=text_conditioning_mode,
+                                 text_guidance_scale=text_guidance_scale,
+                                 device=device).to(self.device)
 
         self.ddim_num_steps = ddim_num_steps
-        self.make_ddim_schedule(ddim_num_steps)
+        self.make_ddim_schedule(ddim_num_steps, schedule=ddim_schedule)
         self.make_ddim_refine_schedule(ddim_num_steps)
 
-    def make_ddim_schedule(self, ddim_num_steps, ddim_discretize="uniform", ddim_eta=0.):
+    def make_ddim_schedule(self, ddim_num_steps, ddim_discretize="uniform", ddim_eta=0., schedule=None):
         self.ddim_timesteps = make_ddim_timesteps(ddim_discr_method=ddim_discretize, num_ddim_timesteps=ddim_num_steps,
                                                   num_ddpm_timesteps=self.num_timesteps)
 
-        betas_ddim = make_beta_schedule(schedule='linear', num_timesteps=self.num_timesteps)
-        betas_ddim = betas_ddim.float().to(self.device)
-        alphas_ddim = 1.0 - betas_ddim
-        self.alphas_cumprod_ddim = alphas_ddim.cumprod(dim=0)
+        schedule = self.ddim_schedule if schedule is None else schedule
+        if schedule == 'training':
+            # Schedule-matched DDIM path: use the same cumulative alpha schedule
+            # that trained the denoiser. The project trains with cosine DDPM
+            # noise; this is an explicit alias for the cosine training schedule.
+            self.alphas_cumprod_ddim = self.alphas_cumprod
+        elif schedule in {'cosine', 'linear'}:
+            # Main paper protocol: schedule-matched DDIM uses the same cosine
+            # cumulative alpha schedule as DDPM training. 'linear' is retained
+            # only for legacy/sensitivity checks and must not be mixed with the
+            # cosine main-result evidence.
+            betas_ddim = make_beta_schedule(schedule=schedule, num_timesteps=self.num_timesteps)
+            betas_ddim = betas_ddim.float().to(self.device)
+            alphas_ddim = 1.0 - betas_ddim
+            self.alphas_cumprod_ddim = alphas_ddim.cumprod(dim=0)
+        else:
+            raise ValueError(
+                "DDIM schedule must be one of {'training', 'cosine', 'linear'}; "
+                f"got {schedule!r}"
+            )
         assert self.alphas_cumprod_ddim.shape[0] == self.num_timesteps, 'alphas have to be defined for each timestep'
         to_torch = lambda x: x.clone().detach().to(torch.float32).to(self.device)
 
@@ -102,7 +136,17 @@ class Diffusion(nn.Module):
         for k in net_state_dict.keys():
             if 'layer_out' not in k and 'layer_in' not in k:
                 new_states[k] = net_state_dict[k]
-        self.model.load_state_dict(net_state_dict, strict=True)
+        missing, unexpected = self.model.load_state_dict(net_state_dict, strict=False)
+        if missing:
+            # Initialize text_spatial_encoder from intent_encoder if shapes match
+            for mk in missing:
+                if 'text_spatial_encoder' in mk:
+                    src_key = mk.replace('text_spatial_encoder', 'intent_encoder')
+                    if src_key in net_state_dict:
+                        dst = self.model.state_dict()[mk]
+                        src = net_state_dict[src_key]
+                        if dst.shape == src.shape:
+                            dst.copy_(src)
 
     def sample_t(self, size=(1,), t_max=None):
        """Samples batches of time steps to use."""
@@ -121,7 +165,9 @@ class Diffusion(nn.Module):
             t[..., i] = i
         return t
 
-    def forward_t(self, l_0_batch, image, sal_box, t, cond='uncond', reparam=False):
+    def forward_t(self, l_0_batch, image, sal_box, t, cond='uncond', reparam=False,
+                  intent_box=None, text_features=None,
+                  text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
         batch_size = l_0_batch.shape[0]
         e = torch.randn_like(l_0_batch).to(l_0_batch.device)
 
@@ -143,7 +189,13 @@ class Diffusion(nn.Module):
 
         l_t_noise = q_sample(l_0_batch, self.alphas_bar_sqrt, self.one_minus_alphas_bar_sqrt, fix_mask, t, noise=e, cond=cond)
 
-        eps_theta = self.model(l_t_noise, image, sal_box, timestep=t)
+        eps_theta = self.model(
+            l_t_noise, image, sal_box, timestep=t,
+            intent_box=intent_box, text_features=text_features,
+            text_spatial_boxes=text_spatial_boxes,
+            text_spatial_mask=text_spatial_mask,
+            use_text_spatial=use_text_spatial,
+        )
 
         if reparam:
             sqrt_one_minus_alpha_bar_t = extract(self.one_minus_alphas_bar_sqrt, t, l_t_noise)
@@ -166,11 +218,19 @@ class Diffusion(nn.Module):
 
         return bbox, label, mask
 
-    def reverse_ddim(self, image, sal_box, cfg, save_inter_dir='', img=None, save_inter=False):
+    def reverse_ddim(self, image, sal_box, cfg, save_inter_dir='', img=None,
+                     save_inter=False, intent_box=None, text_features=None,
+                     text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
         self.model.eval()
-        layout_t_0, intermediates = ddim_sample_loop(self.model, image, sal_box, self.ddim_timesteps, self.ddim_alphas,
-                                                     self.ddim_alphas_prev, self.ddim_sigmas,
-                                                     seq_len=cfg.max_elem, seq_dim=self.seq_dim)
+        layout_t_0, intermediates = ddim_sample_loop(
+            self.model, image, sal_box, self.ddim_timesteps, self.ddim_alphas,
+            self.ddim_alphas_prev, self.ddim_sigmas,
+            seq_len=cfg.max_elem, seq_dim=self.seq_dim,
+            intent_box=intent_box, text_features=text_features,
+            text_spatial_boxes=text_spatial_boxes,
+            text_spatial_mask=text_spatial_mask,
+            use_text_spatial=use_text_spatial,
+        )
         bbox, label, mask = finalize(layout_t_0, self.num_class)
 
         if save_inter:
@@ -181,13 +241,18 @@ class Diffusion(nn.Module):
         return bbox, label, mask
 
     def conditional_reverse_ddim(self, real_layout, image, sal_box, cfg, save_inter_dir='', img=None,
-                                 cond='c', ratio=0.1, stochastic=True, save_inter=False):
+                                 cond='c', ratio=0.1, stochastic=True, save_inter=False,
+                                 intent_box=None, text_features=None,
+                                 text_spatial_boxes=None, text_spatial_mask=None, use_text_spatial=None):
 
         self.model.eval()
         layout_t_0, intermediates = \
             ddim_cond_sample_loop(self.model, real_layout, image, sal_box, self.ddim_timesteps, self.ddim_alphas,
                                   self.ddim_alphas_prev, self.ddim_sigmas, stochastic=stochastic, cond=cond,
-                                  ratio=ratio)
+                                  ratio=ratio, intent_box=intent_box, text_features=text_features,
+                                  text_spatial_boxes=text_spatial_boxes,
+                                  text_spatial_mask=text_spatial_mask,
+                                  use_text_spatial=use_text_spatial)
 
         bbox, label, mask = finalize(layout_t_0, self.num_class)
 
@@ -209,4 +274,3 @@ class Diffusion(nn.Module):
         bbox, label, mask = finalize(layout_t_0, self.num_class)
 
         return bbox, label, mask
-

@@ -35,7 +35,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_root", type=str, required=True)
     parser.add_argument("--dataset", type=str, required=True, choices=["pku", "cgl"])
-    
+
     args = parser.parse_args()
     return args
 

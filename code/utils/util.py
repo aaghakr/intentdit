@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 
 import torch
@@ -13,6 +15,15 @@ from torch import Tensor
 import yaml
 from datetime import datetime
 import pytz
+from pathlib import Path
+
+
+LOCAL_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SERVER_PROJECT_ROOT = Path("/home/viplab/Aagha/intent_aware_layout_generation")
+PATH_PROFILES = {
+    "local": LOCAL_PROJECT_ROOT,
+    "server": SERVER_PROJECT_ROOT,
+}
 
 class Config:
     def __init__(self, config):
@@ -21,6 +32,66 @@ class Config:
                 setattr(self, key, Config(value))
             else:
                 setattr(self, key, value)
+
+
+def resolve_project_root(path_profile=None):
+    """Resolve the active repository root for local/server execution.
+
+    The command-line entrypoints pass ``--path-profile``. Other callers can set
+    ``INTENTDIT_PATH_PROFILE=server``; otherwise local is the safe default.
+    """
+    profile = (path_profile or os.environ.get("INTENTDIT_PATH_PROFILE", "local")).lower()
+    if profile not in PATH_PROFILES:
+        choices = ", ".join(sorted(PATH_PROFILES))
+        raise ValueError(f"Unknown path profile '{profile}'. Choose one of: {choices}")
+    return profile, PATH_PROFILES[profile]
+
+
+def rebase_project_path(path, path_profile=None):
+    """Rebase a path from an older IntentDiT checkout to the active profile.
+
+    Explicit external paths are left alone. Only paths recognizable as an
+    IntentDiT project path are rewritten.
+    """
+    if not path:
+        return path
+    profile, project_root = resolve_project_root(path_profile)
+    expanded = os.path.abspath(os.path.expanduser(os.path.expandvars(str(path))))
+    project_markers = (
+        "intent_aware_layout_generation",
+        "intent_latest_backup",
+        str(LOCAL_PROJECT_ROOT),
+        str(SERVER_PROJECT_ROOT),
+    )
+    if not any(marker in expanded for marker in project_markers):
+        return expanded
+    for owned_dir in ("data", "experiments", "reviews_and_rebuttle", "user_study"):
+        marker = f"/{owned_dir}/"
+        if marker in expanded:
+            suffix = expanded.split(marker, 1)[1]
+            return str(project_root / owned_dir / suffix)
+    return expanded
+
+
+def apply_path_profile(config, path_profile=None):
+    """Rebase project-owned data/checkpoint/output paths to one root."""
+    profile, project_root = resolve_project_root(path_profile)
+    dataset = config.get("dataset_cls") or config.get("dataset")
+
+    config["path_profile"] = profile
+    config["project_root"] = str(project_root)
+
+    if dataset and "paths" in config:
+        config["paths"]["base"] = str(project_root / "data" / "dataset" / dataset / "split")
+    if dataset and "base_check_dir" in config:
+        config["base_check_dir"] = str(project_root / "data" / "checkpoints" / dataset)
+    if "imgname_order_dir" in config:
+        config["imgname_order_dir"] = str(
+            project_root / "data" / "output" / "ptfile" / "image_name_order"
+        )
+    if "save_imgs_dir" in config:
+        config["save_imgs_dir"] = str(project_root / "data" / "output" / "image")
+    return config
 
 
 def process_paths(config):
@@ -37,9 +108,10 @@ def process_paths(config):
 
     return config
 
-def load_config(config_path):
+def load_config(config_path, path_profile=None):
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
+    config = apply_path_profile(config, path_profile)
     config = process_paths(config)
 
     china_tz = pytz.timezone('Asia/Shanghai')

@@ -1,7 +1,12 @@
 import os
 import pandas as pd
 import cv2
-from natsort import natsorted
+try:
+    from natsort import natsorted
+except ImportError:
+    # Natural sorting is convenient for bulk preprocessing but not required by
+    # single-image inference, which imports ``find_bounding_box`` from here.
+    natsorted = sorted
 import numpy as np
 from PIL import Image
 
