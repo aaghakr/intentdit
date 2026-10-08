@@ -55,7 +55,21 @@ REV_VARIANTS=(
     "pku|2|1|pixel_map_only_text|pku_v2|pku_v2_anno_test|0|0.05|token|1"
     "pku|3|1|intent_boxes_only_text|pku_v2|pku_v2_anno_test|0|0.05|token|0"
     "cgl|0|1|saliency_text|cgl|cgl_anno_test|0|0|token|0"
+    # Image-only IntentDiT without the placement loss (same inputs as "both", lambda2=0):
+    # tests the placement-loss claim in the matched image-only setting.
+    "pku|2|0|both_noaux|pku_v2|pku_v2_anno_test|0|0|token|0"
+    "cgl|2|0|both_noaux|cgl|cgl_anno_test|0|0|token|0"
 )
+# REV_ONLY="pku:both_noaux cgl:both_noaux" restricts train/eval to the listed variants.
+if [[ -n "${REV_ONLY:-}" ]]; then
+    selected=()
+    for entry in "${REV_VARIANTS[@]}"; do
+        IFS='|' read -r dataset _ _ slug _ <<< "$entry"
+        [[ " $REV_ONLY " == *" ${dataset}:${slug} "* ]] && selected+=("$entry")
+    done
+    (( ${#selected[@]} )) || die "REV_ONLY matched no variant: $REV_ONLY"
+    REV_VARIANTS=("${selected[@]}")
+fi
 PROMPT_STYLES=${PROMPT_STYLES:-"basic enhanced advanced spatial rich freeform stress"}
 
 rev_experiment() { printf 'rev_%s_vit_%s_trainseed%s' "$1" "$2" "$3"; }
@@ -339,6 +353,18 @@ run_aggregate() {
                 --method-a "${a[$seed_index]}" --method-b "${b[$seed_index]}" \
                 --name-a intentdit --name-b layoutdit_config --iterations "${BOOTSTRAP_ITERATIONS:-10000}" \
                 --output "$REV_SUMMARY_DIR/paired_linear_${dataset}_both_vs_saliency_seed$((seed_index + 1)).json"
+        done
+        # Placement-loss ablation in the image-only setting: IntentDiT vs the same model with lambda2=0.
+        for schedule in linear cosine; do
+            for seed in $SEEDS; do
+                local noaux="$METRIC_DIR/rev_${dataset}_vit_both_noaux_${schedule}_trainseed${seed}_inferseed${INFERENCE_SEED}_per_image.csv"
+                [[ "$DRY_RUN" == "1" || -f "$noaux" ]] || { log "MISSING $noaux"; continue; }
+                run_command "$PYTHON_BIN" "$CODE_DIR/scripts/paired_bootstrap.py" \
+                    --method-a "$METRIC_DIR/rev_${dataset}_vit_both_${schedule}_trainseed${seed}_inferseed${INFERENCE_SEED}_per_image.csv" \
+                    --method-b "$noaux" --name-a intentdit --name-b intentdit_lambda2_0 \
+                    --iterations "${BOOTSTRAP_ITERATIONS:-10000}" \
+                    --output "$REV_SUMMARY_DIR/paired_${schedule}_${dataset}_both_vs_noaux_seed${seed}.json"
+            done
         done
     done
 }
