@@ -5,16 +5,16 @@ poster layout generation. The model combines a continuous diffusion
 transformer with saliency/placement-suitability guidance and optional BERT
 token conditioning.
 
-This repository contains source code and the current Image and Vision
-Computing manuscript. Datasets, checkpoints, generated outputs, experiment
-logs, and user-study responses are intentionally excluded.
+This repository contains the source code, experiment scripts and evaluation
+tools behind the IntentDiT manuscript. Datasets, checkpoints, generated
+outputs, experiment logs, and user-study responses are intentionally excluded.
 
 ## Repository layout
 
 ```text
 code/           Core model, data pipeline, training, evaluation, and tests
 intent_detect/  Placement-suitability (intent-map) predictor
-paper/          Current IVC manuscript and publication figures
+scripts/paper/  Scripts that reproduce every table and figure of the paper
 user_study/     Reproducible human-evaluation web application
 docs/           Setup, data layout, and reproducibility documentation
 data/           Local-only datasets and weights (ignored by Git)
@@ -22,6 +22,11 @@ experiments/    Local-only generated results (ignored by Git)
 ```
 
 ## Installation
+
+```bash
+git clone https://github.com/aaghakr/intentdit.git
+cd intentdit
+```
 
 Python 3.9 or 3.10 and a CUDA-capable PyTorch installation are recommended.
 

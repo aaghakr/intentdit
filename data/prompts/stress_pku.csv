@@ -1,0 +1,401 @@
+poster_path,text_prompt,prompt_category,is_conflicting
+1005.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1010.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1013.png,"Create a design with 4 caption, 1 brand mark, 2 background panel.",synonym,0
+1018.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+1026.png,logo_0 should be above text_0.,relative_relation,0
+1027.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1028.png,"Create a design with 3 caption, 1 brand mark, 2 background panel.",synonym,0
+1030.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+1034.png,text_0 should be above underlay_0.,relative_relation,0
+1037.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1039.png,Create a design with 2 caption.,synonym,0
+1106.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+1108.png,logo_0 should be above text_0.,relative_relation,0
+1111.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1119.png,"Create a design with 3 caption, 1 brand mark.",synonym,0
+112.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+1125.png,logo_0 should be above text_0.,relative_relation,0
+1129.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1130.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+1134.png,underlay_0 should be above logo_0 and underlay_0 should be below logo_0.,contradictory,1
+1139.png,underlay_0 should be below text_0.,relative_relation,0
+1150.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1163.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+1171.png,logo_0 should be above underlay_0 and logo_0 should be below underlay_0.,contradictory,1
+1177.png,logo_0 should be above text_0.,relative_relation,0
+1201.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1210.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+1218.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1222.png,logo_0 should be above text_0.,relative_relation,0
+1228.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1231.png,"Create a design with 2 caption, 2 background panel.",synonym,0
+1245.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1246.png,logo_0 should be above text_0.,relative_relation,0
+125.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1267.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+1289.png,logo_0 should be above underlay_0 and logo_0 should be below underlay_0.,contradictory,1
+1293.png,text_0 should be above underlay_0.,relative_relation,0
+1300.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1308.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+1332.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+134.png,text_0 should be above underlay_0.,relative_relation,0
+1344.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1351.png,"Create a design with 1 caption, 1 brand mark, 1 background panel.",synonym,0
+1367.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1383.png,logo_0 should be above text_0.,relative_relation,0
+1405.png,Place 10 text elements while keeping all content readable.,ood_count,0
+141.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+1417.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+144.png,logo_0 should be above text_0.,relative_relation,0
+1441.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1443.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+1447.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1469.png,logo_0 should be above underlay_0.,relative_relation,0
+1470.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1477.png,"Create a design with 1 caption, 1 brand mark, 1 background panel.",synonym,0
+1481.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+149.png,text_0 should be above underlay_0.,relative_relation,0
+1499.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1504.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+1510.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1517.png,text_0 should be above underlay_0.,relative_relation,0
+1519.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1522.png,"Create a design with 1 caption, 1 brand mark, 1 background panel.",synonym,0
+1524.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+154.png,text_0 should be above underlay_0.,relative_relation,0
+1540.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1560.png,"Create a design with 4 caption, 1 brand mark, 1 background panel.",synonym,0
+1568.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1574.png,logo_0 should be above text_0.,relative_relation,0
+1589.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1600.png,"Create a design with 2 caption, 1 brand mark.",synonym,0
+1617.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+1627.png,logo_0 should be above text_0.,relative_relation,0
+166.png,Place 10 text elements while keeping all content readable.,ood_count,0
+17.png,Create a design with 3 caption.,synonym,0
+1703.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1706.png,text_0 should be above text_0.,relative_relation,0
+1724.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1757.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+1761.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1763.png,logo_0 should be above text_0.,relative_relation,0
+1765.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1800.png,"Create a design with 2 caption, 2 background panel.",synonym,0
+1802.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1805.png,text_0 should be above underlay_0.,relative_relation,0
+181.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1814.png,"Create a design with 3 caption, 1 brand mark.",synonym,0
+1830.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+1851.png,logo_0 should be above underlay_0.,relative_relation,0
+1884.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1891.png,"Create a design with 3 caption, 2 background panel.",synonym,0
+190.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+1901.png,text_0 should be above text_0.,relative_relation,0
+1939.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1969.png,"Create a design with 4 caption, 1 background panel.",synonym,0
+1970.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+1971.png,text_0 should be above text_0.,relative_relation,0
+1982.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1985.png,"Create a design with 3 caption, 2 background panel.",synonym,0
+1987.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1990.png,underlay_0 should be below text_0.,relative_relation,0
+1994.png,Place 10 text elements while keeping all content readable.,ood_count,0
+1995.png,Create a design with 2 caption.,synonym,0
+1997.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2006.png,underlay_0 should be below text_0.,relative_relation,0
+2017.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2033.png,"Create a design with 2 caption, 1 brand mark.",synonym,0
+2039.png,underlay_0 should be above logo_0 and underlay_0 should be below logo_0.,contradictory,1
+2042.png,text_0 should be above text_0.,relative_relation,0
+2049.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2063.png,"Create a design with 4 caption, 1 background panel.",synonym,0
+2118.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+2121.png,underlay_0 should be below text_0.,relative_relation,0
+2123.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2124.png,"Create a design with 3 caption, 2 background panel.",synonym,0
+2147.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+2178.png,text_0 should be above text_0.,relative_relation,0
+2180.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2194.png,"Create a design with 4 caption, 1 brand mark, 2 background panel.",synonym,0
+2209.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2212.png,underlay_0 should be below text_0.,relative_relation,0
+2214.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2236.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+225.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2255.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2274.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2291.png,"Create a design with 2 caption, 1 brand mark.",synonym,0
+2298.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2308.png,text_0 should be above text_0.,relative_relation,0
+2323.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2326.png,"Create a design with 2 caption, 2 brand mark.",synonym,0
+2330.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2335.png,logo_0 should be above underlay_0.,relative_relation,0
+2336.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2337.png,"Create a design with 2 caption, 2 background panel.",synonym,0
+2346.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2361.png,underlay_0 should be below logo_0.,relative_relation,0
+2374.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2381.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+2384.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2397.png,Place 10 text elements while keeping all content readable.,ood_count,0
+24.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2402.png,Create a design with 3 caption.,synonym,0
+2420.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2431.png,logo_0 should be above text_0.,relative_relation,0
+2444.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2452.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+2455.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2464.png,logo_0 should be above text_0.,relative_relation,0
+248.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2492.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+2497.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+25.png,logo_0 should be below logo_0.,relative_relation,0
+2507.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2509.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2514.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2518.png,text_0 should be above text_0.,relative_relation,0
+2520.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2559.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2560.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2566.png,logo_0 should be above text_0.,relative_relation,0
+2573.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2587.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2594.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2597.png,text_0 should be above text_0.,relative_relation,0
+2626.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2633.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+2638.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+2645.png,logo_0 should be above underlay_0.,relative_relation,0
+2654.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2656.png,"Create a design with 2 caption, 1 brand mark.",synonym,0
+2658.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+266.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2665.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2667.png,"Create a design with 6 caption, 1 brand mark, 3 background panel.",synonym,0
+2671.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2673.png,text_0 should be above text_0.,relative_relation,0
+2678.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2691.png,"Create a design with 4 caption, 1 brand mark, 1 background panel.",synonym,0
+27.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2705.png,logo_0 should be above underlay_0.,relative_relation,0
+2706.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2707.png,"Create a design with 4 caption, 2 background panel.",synonym,0
+2709.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2710.png,text_0 should be above text_0.,relative_relation,0
+272.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2728.png,"Create a design with 1 caption, 1 brand mark, 1 background panel.",synonym,0
+2745.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+275.png,logo_0 should be above text_0.,relative_relation,0
+2773.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2774.png,"Create a design with 5 caption, 1 background panel.",synonym,0
+2778.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2788.png,logo_0 should be above text_0.,relative_relation,0
+2806.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2811.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2812.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2813.png,text_0 should be above underlay_0.,relative_relation,0
+2820.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2828.png,"Create a design with 1 caption, 1 brand mark, 1 background panel.",synonym,0
+2834.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+2841.png,logo_0 should be above underlay_0.,relative_relation,0
+2852.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2854.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2856.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+2859.png,underlay_0 should be below text_0.,relative_relation,0
+2865.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2880.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2881.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+2891.png,logo_0 should be above logo_0.,relative_relation,0
+2906.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2909.png,"Create a design with 1 caption, 1 brand mark, 2 background panel.",synonym,0
+2910.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+2921.png,text_0 should be above text_0.,relative_relation,0
+2922.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2936.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+2937.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+2956.png,logo_0 should be above text_0.,relative_relation,0
+2965.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2968.png,Create a design with 1 caption.,synonym,0
+2969.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+2976.png,logo_0 should be above underlay_0.,relative_relation,0
+2978.png,Place 10 text elements while keeping all content readable.,ood_count,0
+2989.png,"Create a design with 1 caption, 1 brand mark.",synonym,0
+2991.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+300.png,text_0 should be above text_0.,relative_relation,0
+3003.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3015.png,Create a design with 4 caption.,synonym,0
+3025.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3043.png,underlay_0 should be below text_0.,relative_relation,0
+3047.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3055.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+3058.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+3072.png,logo_0 should be above text_0.,relative_relation,0
+3074.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3082.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+3087.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+3096.png,logo_0 should be above text_0.,relative_relation,0
+3140.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3147.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+3170.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3173.png,logo_0 should be above text_0.,relative_relation,0
+3175.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3178.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+3183.png,logo_0 should be above underlay_0 and logo_0 should be below underlay_0.,contradictory,1
+319.png,underlay_0 should be below logo_0.,relative_relation,0
+3190.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3192.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+3196.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+3197.png,text_0 should be above underlay_0.,relative_relation,0
+3198.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3202.png,"Create a design with 3 caption, 2 background panel.",synonym,0
+3212.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+324.png,logo_0 should be above text_0.,relative_relation,0
+3243.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3281.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+3282.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3285.png,text_0 should be above text_0.,relative_relation,0
+3297.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3307.png,"Create a design with 3 caption, 2 brand mark.",synonym,0
+3308.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3317.png,logo_0 should be above text_0.,relative_relation,0
+3326.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3328.png,Create a design with 1 caption.,synonym,0
+3339.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+3347.png,underlay_0 should be below text_0.,relative_relation,0
+3354.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3358.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+3360.png,underlay_0 should be above underlay_0 and underlay_0 should be below underlay_0.,contradictory,1
+3361.png,logo_0 should be above text_0.,relative_relation,0
+3372.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3379.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+3388.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+34.png,underlay_0 should be below text_0.,relative_relation,0
+3415.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3429.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+343.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3450.png,logo_0 should be above underlay_0.,relative_relation,0
+3457.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3465.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+3475.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+348.png,logo_0 should be above underlay_0.,relative_relation,0
+3492.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3493.png,"Create a design with 7 caption, 1 brand mark, 1 background panel.",synonym,0
+350.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+3507.png,text_0 should be above text_0.,relative_relation,0
+352.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3520.png,"Create a design with 4 caption, 2 background panel.",synonym,0
+3528.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3541.png,text_0 should be above text_0.,relative_relation,0
+3555.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3560.png,"Create a design with 4 caption, 1 brand mark, 2 background panel.",synonym,0
+3568.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+3573.png,logo_0 should be above text_0.,relative_relation,0
+3580.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3582.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+3610.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+3615.png,text_0 should be above text_0.,relative_relation,0
+3636.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3641.png,"Create a design with 1 caption, 1 brand mark.",synonym,0
+3663.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3677.png,logo_0 should be above text_0.,relative_relation,0
+3678.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3679.png,"Create a design with 2 caption, 2 background panel.",synonym,0
+3689.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+3714.png,logo_0 should be above text_0.,relative_relation,0
+3724.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3735.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+375.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3758.png,logo_0 should be above text_0.,relative_relation,0
+376.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3765.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+378.png,underlay_0 should be above logo_0 and underlay_0 should be below logo_0.,contradictory,1
+379.png,text_0 should be above underlay_0.,relative_relation,0
+3798.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3804.png,"Create a design with 4 caption, 1 brand mark, 2 background panel.",synonym,0
+3818.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+3821.png,logo_0 should be above logo_0.,relative_relation,0
+3848.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3875.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+3883.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+3887.png,text_0 should be above text_0.,relative_relation,0
+3888.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3896.png,"Create a design with 7 caption, 1 brand mark, 2 background panel.",synonym,0
+3911.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+3923.png,logo_0 should be above text_0.,relative_relation,0
+3931.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3935.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+3936.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+3937.png,text_0 should be above text_0.,relative_relation,0
+3979.png,Place 10 text elements while keeping all content readable.,ood_count,0
+3988.png,"Create a design with 4 caption, 1 brand mark, 1 background panel.",synonym,0
+3995.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+4028.png,underlay_0 should be below text_0.,relative_relation,0
+4054.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4055.png,"Create a design with 3 caption, 2 brand mark, 1 background panel.",synonym,0
+4060.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4065.png,logo_0 should be above text_0.,relative_relation,0
+407.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4079.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+4088.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+4089.png,logo_0 should be above text_0.,relative_relation,0
+409.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4105.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+414.png,text_0 should be above underlay_0 and text_0 should be below underlay_0.,contradictory,1
+4148.png,text_0 should be above text_0.,relative_relation,0
+4152.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4157.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+4163.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4169.png,logo_0 should be above underlay_0.,relative_relation,0
+4177.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4184.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+42.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4201.png,text_0 should be above text_0.,relative_relation,0
+4215.png,Place 10 text elements while keeping all content readable.,ood_count,0
+422.png,"Create a design with 5 caption, 1 brand mark.",synonym,0
+4224.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4237.png,logo_0 should be above logo_0.,relative_relation,0
+4243.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4255.png,Create a design with 2 caption.,synonym,0
+4256.png,underlay_0 should be above text_0 and underlay_0 should be below text_0.,contradictory,1
+4278.png,logo_0 should be above text_0.,relative_relation,0
+428.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4293.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+4305.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4309.png,text_0 should be above text_0.,relative_relation,0
+4320.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4323.png,"Create a design with 3 caption, 1 brand mark, 1 background panel.",synonym,0
+4326.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4328.png,text_0 should be above underlay_0.,relative_relation,0
+433.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4342.png,"Create a design with 2 caption, 1 background panel.",synonym,0
+4343.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+4347.png,text_0 should be above text_0.,relative_relation,0
+4357.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4359.png,"Create a design with 2 caption, 1 brand mark, 1 background panel.",synonym,0
+4362.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4385.png,logo_0 should be above text_0.,relative_relation,0
+4386.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4388.png,Create a design with 1 caption.,synonym,0
+439.png,text_0 should be above text_0 and text_0 should be below text_0.,contradictory,1
+4398.png,text_0 should be above text_0.,relative_relation,0
+4402.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4410.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+4413.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4415.png,text_0 should be above text_0.,relative_relation,0
+4437.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4456.png,"Create a design with 2 caption, 1 brand mark.",synonym,0
+4489.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4493.png,text_0 should be above underlay_0.,relative_relation,0
+4503.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4523.png,"Create a design with 3 caption, 1 background panel.",synonym,0
+4533.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4536.png,logo_0 should be above text_0.,relative_relation,0
+4539.png,Place 10 text elements while keeping all content readable.,ood_count,0
+454.png,"Create a design with 1 caption, 1 background panel.",synonym,0
+4558.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
+4569.png,logo_0 should be above text_0.,relative_relation,0
+457.png,Place 10 text elements while keeping all content readable.,ood_count,0
+4599.png,"Create a design with 3 caption, 1 brand mark.",synonym,0
+4612.png,logo_0 should be above text_0 and logo_0 should be below text_0.,contradictory,1
