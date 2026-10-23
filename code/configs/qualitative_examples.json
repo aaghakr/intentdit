@@ -1,0 +1,8 @@
+{
+ "criterion": {
+  "image_only": "IntentDiT (S_L, training seed 1) with Type-F1 >= 0.85, between n_gt and n_gt + 1 elements, at least 70% of the designer's total box area, Ove <= 0.02, OOB = 0, and occlusion at least 0.03 below both LayoutDiT outputs; final choice among the ranked candidates by visual clarity.",
+  "prompt_control": "Free-form prompts for which IntentDiT given the element list (training seed 1) reproduces the manual reference counts exactly and places every requested element in its requested cell; ranked by raw-instruction SPLA and exact count, the SPLA margin over PosterO given the same list, and occlusion; final choice by visual clarity."
+ },
+ "image_only": {"pku": ["791.png", "3641.png", "6937.png"], "cgl": ["54429.png", "45214.png", "25424.png"]},
+ "prompt_control": {"pku": ["1013.png", "473.png", "9136.png"], "cgl": ["51021.png", "19820.png", "64328.png"]}
+}

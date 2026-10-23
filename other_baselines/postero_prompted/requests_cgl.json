@@ -1,0 +1,978 @@
+[
+ {
+  "poster_path": "21794.png",
+  "prompt": "Create a powerful fitness poster with a compact panel at top-left containing title text, short feature text at middle-left, and a logo at bottom-left, keeping the man and equipment clear.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "61250.png",
+  "prompt": "Create a luxury bedroom poster with elegant title text at top-right, supporting text at middle-right, and a small logo at top-left, keeping the woman and bed unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "18797.png",
+  "prompt": "Create a minimalist skincare poster with refined title text at top-center, supporting text at middle-center, and a small logo at top-left, keeping the serum bottle clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "1150.png",
+  "prompt": "Create a professional karaoke poster with large title text at top-center, two icon-and-text features at top-left and top-right, and a small logo at bottom-left.",
+  "requested": {
+   "text": 3,
+   "logo": 2
+  }
+ },
+ {
+  "poster_path": "82760.png",
+  "prompt": "Create a luxury eyewear poster with a slim text panel at bottom-center, title text at bottom-left, and a logo at bottom-right, keeping the face clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "45040.png",
+  "prompt": "Create a clean skincare poster with refined title text at top-left, supporting text at top-right, and a small logo at bottom-right, keeping the tube fully visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "54877.png",
+  "prompt": "Create a soft pink traditional-wear poster with title text at top-left, short vertical text at bottom-left, and a small heart decoration at bottom-right, keeping the model unobstructed.",
+  "requested": {
+   "text": 2,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "79465.png",
+  "prompt": "Create a bold sporting-goods poster with a dramatic red-and-black background panel, large title text at top-center, and a small logo at bottom-right, keeping the fishing rods unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "30209.png",
+  "prompt": "Create a fashion-editorial handbag poster with minimal title text at top-center, short caption text at middle-center, and a small logo at top-right, keeping the model and bag unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "54053.png",
+  "prompt": "Create an elegant fashion poster with a vertical text panel at middle-left and a small logo at bottom-left, keeping the clothing, flowers, and handbag unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "29789.png",
+  "prompt": "Create a warm modern living-room poster with minimal title text at bottom-left, short caption text at bottom-left, and a small logo at top-right, keeping the furniture unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "47960.png",
+  "prompt": "Create a sleek dark-mode appliance poster with minimal title text at top-center, fine-print text at bottom-center, and a small logo at top-left, keeping the device unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "76289.png",
+  "prompt": "Create an elegant wellness poster with refined title text at top-left, supporting text at top-right, and a small logo at top-center, keeping the bottle fully visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "29622.png",
+  "prompt": "Create a professional measuring-tool poster with large title text at top-center, feature text at top-left, and a small logo at top-right, keeping the device and hand clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "39945.png",
+  "prompt": "Create a portable audio poster with large title text at top-center, feature text boxes at top-left and top-right, and a small logo at bottom-left, leaving the speaker and microphone unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "41262.png",
+  "prompt": "Create an elegant beauty poster with refined title text at top-center, short feature text at top-left, and a small logo at top-right, leaving the eyelashes clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "8610.png",
+  "prompt": "Create a luxury massage-chair poster with a translucent panel at top-left containing title text, two benefit text lines at middle-left, and a small logo at top-center.",
+  "requested": {
+   "text": 2,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "77798.png",
+  "prompt": "Create a premium coffee poster with large title text at top-center, supporting text at middle-center, and a small logo at top-left, keeping the woman\u2019s face and machine clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "18525.png",
+  "prompt": "Create a family wellness poster with large title text at top-center, two benefit text lines at middle-center, a small icon, and a logo at top-left.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "81066.png",
+  "prompt": "Create a nutritious pet-food poster with playful title text at top-center, two benefit text lines at middle-center, a small icon, and a logo at top-left.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "83265.png",
+  "prompt": "Create a playful children\u2019s accessory poster with cheerful title text at top-right, supporting text at middle-right, and a small logo at top-center, keeping the duck design unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "47226.png",
+  "prompt": "Create a fresh vitamin poster with large title text at top-center, two benefit text lines at middle-center, a citrus icon, and a small logo at top-right.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "42821.png",
+  "prompt": "Create a modern headwear poster with bold title text at top-center, short promotional text at middle-center, and a small logo at top-left, keeping the cap unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "17386.png",
+  "prompt": "Create a futuristic technology poster with bold title text at top-center, two feature text lines at middle-center, and a small logo at top-left, keeping the glowing device clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "37572.png",
+  "prompt": "Create a winter footwear poster with bold title text at top-left, two compact feature text blocks at middle-left, and a small logo at top-right, keeping the boot and flame clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "82580.png",
+  "prompt": "Create a natural skincare poster with refined title text at top-left, two benefit text boxes at middle-left, and a small logo at top-right.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "37643.png",
+  "prompt": "Create a modern home-lighting poster with a compact text panel at middle-left and a small logo at middle-right, leaving the ceiling lamp fully visible.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "56981.png",
+  "prompt": "Create a clinical skincare poster with refined title text at top-left, short benefit text at top-right, and a small logo at bottom-right, leaving both bottles unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "65819.png",
+  "prompt": "Create a practical storage poster with bold title text at top-center, three short icon-and-text features at top-left, top-center, and top-right, and a small logo at top-right.",
+  "requested": {
+   "text": 4,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "34439.png",
+  "prompt": "Create a warm baby-feeding poster with large title text at top-left, two benefit text lines at middle-left, a small icon at top-center, and a logo at top-right.",
+  "requested": {
+   "text": 3,
+   "logo": 2
+  }
+ },
+ {
+  "poster_path": "26983.png",
+  "prompt": "Create a luxurious skincare poster with elegant title text at top-center, short benefit text at top-left, and a small logo at top-right, keeping every jar visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "46750.png",
+  "prompt": "Create a clean reflective skincare poster with title text at top-center, a subtle ripple-water decoration at middle-center, and a small logo at top-left, keeping the bottles unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "47697.png",
+  "prompt": "Create a bright lifestyle beverage poster with minimal title text at top-right, short descriptive text at middle-right, and a small logo at top-left, keeping the drink and coffee tin unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "33573.png",
+  "prompt": "Create a soothing wellness poster with calm title text at top-left, two benefit text lines at middle-left, and a small logo at top-right, keeping the product and feet clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "54005.png",
+  "prompt": "Create a rugged watch poster with bold title text at bottom-center, two short feature text blocks at bottom-center, and a small logo at bottom-right, leaving the watch unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "60090.png",
+  "prompt": "Create a luxe holographic cosmetics poster with refined title text at top-left, short benefit text at middle-left, and a small logo at top-right, keeping the compact case unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "5203.png",
+  "prompt": "Create a futuristic tech-themed mattress poster with bold title text at top-center, a thin border panel at middle-center, and a small logo at bottom-left, keeping the mattress unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "27932.png",
+  "prompt": "Create a romantic beauty poster with a soft gradient panel at bottom-center containing title text, short text at bottom-center, and a small logo at top-right, keeping the portrait unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "61671.png",
+  "prompt": "Create a clean car-accessory poster with title text at top-left, short feature text at top-right, icons at bottom-left and bottom-right, and a logo at bottom-center.",
+  "requested": {
+   "text": 2,
+   "logo": 3
+  }
+ },
+ {
+  "poster_path": "51021.png",
+  "prompt": "Create a modern desk-lamp poster with bold title text at top-right, short benefit text at middle-right, and a small logo at top-center, leaving the lamp and astronaut clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "44138.png",
+  "prompt": "Create a youthful fashion poster with a slim text panel at middle-left and a small logo at bottom-left, keeping the model\u2019s face and outfit unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "78261.png",
+  "prompt": "Create a soft pink lifestyle poster for cotton pads with title text at top-left, short text at middle-left, and a small logo at bottom-right, keeping the packaging and luggage unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "23470.png",
+  "prompt": "Create a smart-irrigation poster with bold title text at top-right, short feature text boxes at middle-right, and a logo at bottom-left, keeping the timer device unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "31042.png",
+  "prompt": "Create a comfortable lounge-chair poster with title text at top-center, two short benefit text boxes at top-left and top-right, and a small logo at top-right.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "16637.png",
+  "prompt": "Create a premium coffee-machine poster with large title text at top-center, two feature text lines at middle-center, and a small logo at top-left, leaving the appliance unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "45308.png",
+  "prompt": "Create a fresh sunscreen poster with large title text at top-center, supporting text at middle-center, a sun icon, and a small logo at top-right.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "62687.png",
+  "prompt": "Create a minimalist bedroom poster with bold title text at top-center, two icon-and-text features at bottom-left and bottom-right, and a small logo at bottom-right.",
+  "requested": {
+   "text": 3,
+   "logo": 2
+  }
+ },
+ {
+  "poster_path": "38001.png",
+  "prompt": "Create a refined blue skincare poster with small title text at top-left, a molecular decoration at bottom-right, and a thin border decoration, keeping the serum bottle unobstructed.",
+  "requested": {
+   "text": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "68034.png",
+  "prompt": "Create a professional kitchen-equipment poster with bold title text at top-right, three short feature text blocks at middle-right, and a small logo at top-left, keeping both appliances unobstructed.",
+  "requested": {
+   "text": 4,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "20695.png",
+  "prompt": "Create an energetic sports poster with bold title text and short promotional text in a panel at bottom-left, plus a small logo at top-right.",
+  "requested": {
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "39578.png",
+  "prompt": "Create a home-cooling poster with large title text at top-center, supporting text at top-left, and a small logo at top-right, leaving the air conditioner unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "55819.png",
+  "prompt": "Create a medical device poster with title text at top-center, brief benefit text in a panel at middle-right, and a logo at top-right, leaving the tester unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "52543.png",
+  "prompt": "Create a dreamy footwear poster with title text at top-left, supporting text at top-right, and a small logo at top-center, keeping the slippers and moon visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "72985.png",
+  "prompt": "Create a cheerful lifestyle poster with bold title text at top-center, short text at middle-center, and a small logo at bottom-left, keeping the two men and fruit unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "19820.png",
+  "prompt": "Create a refined fashion poster with elegant title text at top-right, supporting text at middle-right, and a small logo at bottom-right, keeping the model\u2019s face and outfit clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "29443.png",
+  "prompt": "Create an automotive-care poster with bold title text at top-center, three icon-and-text benefits at bottom-left, bottom-center, and bottom-right, plus a logo at top-right, keeping both wipers clear.",
+  "requested": {
+   "text": 1,
+   "logo": 4
+  }
+ },
+ {
+  "poster_path": "39473.png",
+  "prompt": "Create a youthful footwear poster with bold title text in a panel at bottom-center, supporting text at bottom-center, and a small logo at bottom-right, keeping the shoes clear.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "75377.png",
+  "prompt": "Create a playful family-game poster with cheerful title text at top-right, short promotional text at middle-right, and a small logo at bottom-right, keeping the game components clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "18087.png",
+  "prompt": "Create a warm home-lighting poster with elegant title text at top-right, short descriptive text at middle-right, and a small logo at top-left, leaving the lamp unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "18699.png",
+  "prompt": "Create a festive red diaper poster with bold title text at middle-center, confetti and ribbon decorations at top-left, top-right, and bottom-right, plus a logo at bottom-left, keeping the packaging unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "embellishment": 3
+  }
+ },
+ {
+  "poster_path": "82000.png",
+  "prompt": "Create a health-supplement poster with strong title text at top-center, two benefit text lines at middle-center, and a small logo at top-left, leaving the products and hands clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "78160.png",
+  "prompt": "Create a bold household-product poster with a slim translucent text panel at bottom-center and a small logo at top-right, keeping both roll openings visible.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "72205.png",
+  "prompt": "Create a warm wooden-furniture poster showing two headboard styles stacked, with a small panel at top-left containing title text and a logo at bottom-right, keeping both beds visible.",
+  "requested": {
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "65530.png",
+  "prompt": "Create a practical packaging poster with bold title text at top-left, short feature text at top-right, and a small logo at top-center, keeping the open box visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "56280.png",
+  "prompt": "Create a fresh dairy poster with bold title text at top-center, a DNA-strand underlay at middle-center, and short text at bottom-center, keeping the milk powder tins unobstructed.",
+  "requested": {
+   "text": 2,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "17574.png",
+  "prompt": "Create an artistic avant-garde fashion collage poster with title text at top-left, scribble decorations at top-right, bottom-left, and bottom-right, plus a small logo at bottom-center, keeping the models visible.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "embellishment": 3
+  }
+ },
+ {
+  "poster_path": "64328.png",
+  "prompt": "Create a contemporary fashion poster with title text at top-left, supporting text at middle-left, and a small logo at bottom-left, keeping the model\u2019s face and outfit clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "34521.png",
+  "prompt": "Create a dynamic blue poster with bold title text at top-left, short feature text at middle-left, and a small logo at bottom-right, keeping the splashing sponge unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "33462.png",
+  "prompt": "Create an industrial equipment poster with bold title text at top-center, three short feature text blocks at middle-center, and a small logo at top-left, keeping the machine clear.",
+  "requested": {
+   "text": 4,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "13984.png",
+  "prompt": "Create a smart-security poster with a slim text panel at top-left, three feature icons at middle-left, and a logo at bottom-left, avoiding the handle and smartphone.",
+  "requested": {
+   "text": 1,
+   "logo": 4
+  }
+ },
+ {
+  "poster_path": "22705.png",
+  "prompt": "Create a fresh gourmet poster with bold title text at top-center, two short benefit text blocks at middle-center, and a small logo at top-left, keeping the food and jars clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "42859.png",
+  "prompt": "Create a clean skincare poster with refined title text at top-center, benefit text at top-right, and a small logo at top-left, leaving the tube unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "75539.png",
+  "prompt": "Create a modern teal skincare poster with minimal title text at middle-left, short product text at bottom-left, and a small logo at bottom-right, keeping the spray bottles unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "79990.png",
+  "prompt": "Create a minimalist footwear poster with bold title text at top-center, short caption text at middle-center, and a small logo at top-right, keeping both shoe angles unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "66019.png",
+  "prompt": "Create a premium food poster with elegant title text at top-left, supporting text at middle-left, and a small logo at top-right, leaving both meat cuts unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "83654.png",
+  "prompt": "Create a refreshing beverage poster with bold title text at top-center, two benefit text lines at middle-center, and a small logo at top-left, keeping the pouch clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "19867.png",
+  "prompt": "Create a playful snack poster with large title text at top-center, short promotional text at middle-center, a small decoration, and a small logo at top-left.",
+  "requested": {
+   "text": 2,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "69646.png",
+  "prompt": "Create a clean menswear poster with minimal title text at top-right, short descriptive text at middle-right, and a small logo at top-left, keeping the model and jeans unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "13137.png",
+  "prompt": "Create a premium automotive-interior poster with elegant title text at top-left, supporting text at middle-left, and a small logo at top-right, leaving the seats unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "75087.png",
+  "prompt": "Create an elegant interior-design poster with refined title text at bottom-left, short descriptive text at bottom-left, and a small logo at top-right, keeping the desk and artwork unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "79643.png",
+  "prompt": "Create a premium wellness poster with elegant title text at top-center, benefit text at top-left, and a small logo at top-right, leaving the bottle unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "23154.png",
+  "prompt": "Create a professional fashion poster with a slim text panel at middle-right and a logo at bottom-right, keeping the model\u2019s face and outfit completely clear.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "77862.png",
+  "prompt": "Create a modern projector poster with title text at top-left, two feature text lines at middle-left, and a small logo at top-center, keeping both devices clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "23922.png",
+  "prompt": "Create a modern cleaning-appliance poster with a compact panel at top-left containing title text, supporting text at middle-left, and a small logo at top-right, keeping the vacuums and cat clear.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "46691.png",
+  "prompt": "Create a minimalist fashion poster with small title text at top-right, short caption text at middle-right, and a tiny logo at top-left, keeping the model and vest unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "60052.png",
+  "prompt": "Create a minimalist menswear poster with a vertical text panel at middle-left and a small logo at top-right, keeping the model\u2019s face and clothing unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "11506.png",
+  "prompt": "Create a clean industrial equipment poster with a gradient blue background panel, bold title text at top-left, and short spec text at bottom-right, keeping the gantry hoist unobstructed.",
+  "requested": {
+   "text": 2
+  }
+ },
+ {
+  "poster_path": "13142.png",
+  "prompt": "Create a clean pharmaceutical poster with bold title text at top-right, short feature text at middle-right, and a small logo at top-left, keeping the vials and packaging unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "10453.png",
+  "prompt": "Create a playful yellow beverage poster with bold title text at top-center, short caption text at middle-center, and a small logo at bottom-left, keeping the floating box and fruit props unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "7975.png",
+  "prompt": "Create a soft handwritten-style skincare poster with playful title text at top-left, short caption text at middle-left, and a small logo on an underlay at bottom-left, keeping the bottles unobstructed.",
+  "requested": {
+   "text": 2,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "46543.png",
+  "prompt": "Create an artisanal tea poster with elegant title text at top-left, short story text at middle-left, and a small logo at top-right, keeping the teapot and hands clear.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "80506.png",
+  "prompt": "Create a luxurious purple skincare poster with bold title text at top-center, benefit text at middle-center, and a small logo at top-left, keeping the serum bottles unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "50843.png",
+  "prompt": "Create a vibrant pink kitchen-appliance poster with bold title text at top-center, short feature text at middle-center, and a small logo at bottom-left, keeping the blender unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "66688.png",
+  "prompt": "Create a playful character poster with whimsical title text at top-center, short promotional text at middle-center, and a small logo at top-left, keeping every toy visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "40914.png",
+  "prompt": "Create a luxury jewelry poster with elegant title text at top-center, short descriptive text at middle-center, and a small logo at top-left, keeping the ring unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "65383.png",
+  "prompt": "Create a festive skincare poster with bold title text at top-center, two short benefit text blocks at middle-center, and a small logo at top-left, keeping all products clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "52414.png",
+  "prompt": "Create a luxury skincare poster with bold title text at bottom-center, supporting text at bottom-center, a small decoration at bottom-left, and a logo at bottom-right.",
+  "requested": {
+   "text": 2,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "63476.png",
+  "prompt": "Create an ambient outdoor-lighting poster with small title text at bottom-center, short feature text at bottom-center, and a subtle logo at bottom-right, keeping the light fixture unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "61021.png",
+  "prompt": "Create a warm bakery poster with bold title text at top-left, supporting text at middle-left, and a small logo at bottom-right, leaving the packaged bread fully visible.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "32308.png",
+  "prompt": "Create a commercial kitchen-equipment poster with title text at top-left, two feature text lines at middle-left, and a small logo at top-right, keeping the machinery unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "51919.png",
+  "prompt": "Create an industrial cable poster with bold title text at top-center, supporting text at top-left, and a small logo at top-right, leaving the spool unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "60845.png",
+  "prompt": "Create a soft pastel baby-shoes poster with title text at top-center, small clothespin and dried-flower decorations at middle-center, and a logo at bottom-right, keeping the items unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "30428.png",
+  "prompt": "Create a bold blue skincare poster with title text on a panel at top-center and three unobstructed product bottles at bottom-center.",
+  "requested": {
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "62853.png",
+  "prompt": "Create a floral hair-care poster with large title text at top-center, promotional text on a panel at top-left, and a small logo at top-right.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "39068.png",
+  "prompt": "Create a futuristic display poster with a compact panel at top-left containing title text, short feature text at top-right, and a small logo at bottom-right, keeping the device unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "35746.png",
+  "prompt": "Create a festive furniture poster with bold title text at bottom-center, supporting text at bottom-center, a small decoration, and a small logo at bottom-right.",
+  "requested": {
+   "text": 2,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "7751.png",
+  "prompt": "Create a natural beauty poster with elegant title text at top-right, two benefit text lines at middle-right, and a small logo at top-center, leaving the oil and flowers clear.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "12875.png",
+  "prompt": "Create a practical medical-equipment poster with a small compliance text panel at top-center, short title text at middle-center, and a logo at bottom-left, keeping the wheelchair unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "63380.png",
+  "prompt": "Create a premium dark-toned liquor poster with bold title text at top-right, short fine-print text at bottom-right, and a small logo at top-left, keeping the jar unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "87513.png",
+  "prompt": "Create a premium mattress poster with large title text at top-center, two icon-and-text benefits at top-left and top-right, and a small logo at top-right.",
+  "requested": {
+   "text": 1,
+   "logo": 2
+  }
+ },
+ {
+  "poster_path": "38206.png",
+  "prompt": "Create a casual streetwear poster with bold title text in a panel at top-right, short caption text at middle-right, and a small logo at top-left, keeping the model unobstructed.",
+  "requested": {
+   "text": 1,
+   "logo": 1,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "81038.png",
+  "prompt": "Create an artisanal teaware poster with elegant title text at top-center, short story text at middle-center, a small decoration, and a small logo at top-left.",
+  "requested": {
+   "text": 2,
+   "logo": 1,
+   "embellishment": 1
+  }
+ },
+ {
+  "poster_path": "83852.png",
+  "prompt": "Create a professional industrial poster with bold title text at top-left, two specification text lines at middle-left, and a small logo at bottom-left.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "75396.png",
+  "prompt": "Create a luxurious black-and-gold skincare poster with minimal title text at top-left, fine-print text at bottom-right, and a small logo on an underlay, keeping the jars unobstructed.",
+  "requested": {
+   "text": 2,
+   "underlay": 1
+  }
+ },
+ {
+  "poster_path": "71844.png",
+  "prompt": "Create an elegant furniture poster with bold title text at top-center, two icon-and-text features at middle-left and middle-right, and a small logo at top-right, leaving the table unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 2
+  }
+ },
+ {
+  "poster_path": "26597.png",
+  "prompt": "Create a premium coffee poster with elegant title text at top-center, a short text line at middle-center, and a small logo at top-right, leaving the cup unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "33050.png",
+  "prompt": "Create a premium hair-care poster with refined title text at top-center, two benefit text lines at middle-center, and a small logo at top-left, leaving both bottles unobstructed.",
+  "requested": {
+   "text": 3,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "49723.png",
+  "prompt": "Create a soft flat-lay lingerie poster with title text at top-right, short descriptive text at middle-right, and a small logo at top-left, keeping the bras and props unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "83363.png",
+  "prompt": "Create a dramatic dark-red electronics poster with bold title text at top-center, short feature text at middle-center, and a small logo at bottom-right, keeping the TV screen unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ },
+ {
+  "poster_path": "83469.png",
+  "prompt": "Create a streetwear fashion poster with bold title text at top-left, short feature text at middle-left, and a small logo at top-right, keeping the model unobstructed.",
+  "requested": {
+   "text": 2,
+   "logo": 1
+  }
+ }
+]

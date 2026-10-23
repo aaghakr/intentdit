@@ -1,0 +1,206 @@
+% Figure 2: IntentDiT architecture (vector), drawn at the MDPI full width (\fulllength = 18.47 cm).
+% Compile: pdflatex fig02_architecture_v2.tex   (thumbnails in arch/)
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{arrows.meta,calc}
+
+\definecolor{inp}{HTML}{4A7FC1}   % inputs and visual pathway
+\definecolor{grn}{HTML}{5A9E4B}   % box pathways
+\definecolor{org}{HTML}{D98C2B}   % prompt pathways
+\definecolor{pur}{HTML}{8B68B8}   % denoiser
+\definecolor{ind}{HTML}{5F67B8}   % sampling
+\definecolor{red}{HTML}{C9504C}   % losses
+\definecolor{ink}{HTML}{1F1F1D}
+\definecolor{muted}{HTML}{5E5D58}
+
+\newcommand{\fH}{\fontsize{9}{10.5}\selectfont\bfseries}
+\newcommand{\fA}{\fontsize{6.8}{7.9}\selectfont}
+\newcommand{\fAb}{\fontsize{6.8}{7.9}\selectfont\bfseries}
+\newcommand{\fB}{\fontsize{5.9}{6.8}\selectfont}
+
+\tikzset{
+  >={Stealth[length=1.7mm,width=1.3mm]},
+  arr/.style={->,draw=ink,line width=0.5pt},
+  ln/.style={draw=ink,line width=0.5pt},
+  panel/.style={draw=#1,fill=#1!7,rounded corners=3pt,line width=0.6pt},
+  cell/.style={draw=#1,fill=white,rounded corners=2pt,line width=0.5pt,align=center,font=\fA,text=ink,inner sep=1.5pt},
+  sub/.style={draw=pur,fill=white,rounded corners=2pt,line width=0.55pt,align=center,font=\fA,text=ink,
+              minimum width=3.30cm,minimum height=0.60cm,inner sep=1pt},
+  head/.style={font=\fH,text=ink,anchor=base},
+  note/.style={font=\fB,text=muted,align=center},
+  dot/.style={circle,fill=ink,inner sep=0pt,minimum size=2.2pt},
+  thumb/.style={inner sep=0pt,draw=#1!45,line width=0.3pt},
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+% ================================================================== headers
+\node[head] at (1.40,12.45) {Inputs};
+\node[head] at (5.50,12.45) {Conditioning encoders};
+\node[head] at (11.00,12.45) {Layout denoiser};
+\node[head] at (16.00,12.45) {Sampling and training};
+
+% ================================================================== column 1: inputs
+% noisy layout
+\draw[panel=inp] (0,11.05) rectangle (2.80,11.75);
+\foreach \x/\y/\w in {0.14/11.42/0.30, 0.24/11.24/0.38, 0.44/11.50/0.22}
+  \draw[draw=inp!80!black,fill=inp!25,line width=0.35pt] (\x,\y) rectangle ++(\w,0.13);
+\node[font=\fAb,text=ink,anchor=west] at (0.80,11.50) {Noisy layout $\mathbf{L}_t$};
+\node[font=\fB,text=muted,anchor=west] at (0.80,11.25) {class + box};
+% timestep
+\draw[panel=inp] (0,10.30) rectangle (2.80,10.90);
+\draw[draw=inp!80!black,line width=0.5pt,fill=white] (0.40,10.60) circle (0.17);
+\draw[draw=inp!80!black,line width=0.5pt] (0.40,10.60) -- (0.40,10.72) (0.40,10.60) -- (0.49,10.56);
+\node[font=\fAb,text=ink,anchor=west] at (0.80,10.60) {Timestep $t$};
+% background image
+\draw[panel=inp] (0,8.15) rectangle (2.80,9.95);
+\node[thumb=inp] at (0.62,9.05) {\includegraphics[height=1.55cm]{arch/input.png}};
+\node[font=\fAb,text=ink,anchor=west,align=left] at (1.30,9.05) {Background\\image $I$};
+% saliency map
+\draw[panel=inp] (0,6.35) rectangle (2.80,7.65);
+\node[thumb=inp] at (0.55,7.00) {\includegraphics[height=1.10cm]{arch/saliency.png}};
+\node[font=\fAb,text=ink,anchor=west,align=left] at (1.15,7.00) {Saliency\\map $s$};
+% placement-suitability map
+\draw[panel=inp] (0,5.05) rectangle (2.80,6.25);
+\node[thumb=inp] at (0.55,5.65) {\includegraphics[height=1.00cm]{arch/placement.png}};
+\node[font=\fAb,text=ink,anchor=west,align=left] at (1.05,5.78) {Placement-\\suitability\\map $m$};
+\node[font=\fB,text=muted,anchor=west] at (1.05,5.19) {$f_\psi(I)$, frozen};
+% prompt
+\draw[panel=inp] (0,3.25) rectangle (2.80,4.60);
+\draw[draw=inp!80!black,fill=white,line width=0.45pt,rounded corners=1.5pt] (0.15,4.08) rectangle (0.60,4.40);
+\draw[draw=inp!80!black,fill=white,line width=0.45pt] (0.25,4.08) -- (0.22,3.96) -- (0.34,4.08);
+\foreach \y in {4.29,4.20} \draw[draw=inp!70,line width=0.4pt] (0.22,\y) -- (0.53,\y);
+\node[font=\fAb,text=ink,anchor=west] at (0.80,4.24) {Prompt $T$};
+\node[font=\fB,text=muted,anchor=north west,align=left] at (0.10,3.92)
+  {e.g.\ ``1 logo at top-left,\\ 2 texts at top-center''};
+
+% ================================================================== column 2: encoders
+% visual pathway
+\draw[panel=inp] (3.35,7.60) rectangle (7.65,9.95);
+\node[cell=inp,minimum width=1.12cm,minimum height=0.66cm] (cat) at (4.02,9.30) {Concat\\$[I;s;m]$};
+\node[cell=inp,minimum width=1.12cm,minimum height=0.66cm] (vit) at (5.48,9.30) {ViT\\encoder};
+\node[cell=inp,minimum width=1.12cm,minimum height=0.66cm] (Z)   at (6.95,9.30) {Image\\tokens $Z$};
+\draw[arr] (cat) -- (vit); \draw[arr] (vit) -- (Z);
+\node[cell=inp,minimum width=1.12cm,minimum height=0.66cm] (qm) at (6.95,8.10) {Query\\module};
+\draw[arr] (Z) -- (qm);
+\node[note,anchor=east,align=right] at (6.30,8.10) {predicts the\\guidance weight};
+% saliency boxes
+\draw[panel=grn] (3.35,6.50) rectangle (7.65,7.30);
+\node[cell=grn,minimum width=2.30cm,minimum height=0.50cm] (sb) at (4.62,6.90) {Saliency boxes $B^{\mathrm{sal}}$};
+\node[cell=grn,minimum width=1.60cm,minimum height=0.50cm] (ms) at (6.75,6.90) {MLP $\phi_{\mathrm{sal}}$};
+\draw[arr] (sb) -- (ms);
+% placement boxes
+\draw[panel=grn] (3.35,5.30) rectangle (7.65,6.10);
+\node[cell=grn,minimum width=2.30cm,minimum height=0.50cm] (pb) at (4.62,5.70) {Placement boxes $B^{\mathrm{int}}$};
+\node[cell=grn,minimum width=1.60cm,minimum height=0.50cm] (mi) at (6.75,5.70) {MLP $\phi_{\mathrm{int}}$};
+\draw[arr] (pb) -- (mi);
+% parser
+\draw[panel=org] (3.35,4.05) rectangle (7.65,5.05);
+\node[cell=org,minimum width=1.05cm,minimum height=0.62cm] (pp) at (3.97,4.55) {Parser\\$\pi(T)$};
+\begin{scope}[shift={(4.86,4.30)}]
+  \fill[org!55] (0,0.34) rectangle (0.17,0.51);
+  \draw[draw=org!80!black,line width=0.4pt] (0,0) grid[step=0.17] (0.51,0.51);
+\end{scope}
+\node[note,anchor=west] at (5.43,4.55) {$3{\times}3$\\cells};
+\node[cell=org,minimum width=1.12cm,minimum height=0.50cm] (mu) at (6.95,4.55) {MLP $\phi_{\mathrm{usr}}$};
+\draw[arr] (pp.east) -- (4.82,4.55);
+\draw[arr] (5.98,4.55) -- (mu.west);
+% prompt encoder
+\draw[panel=org] (3.35,3.00) rectangle (7.65,3.80);
+\node[cell=org,minimum width=2.30cm,minimum height=0.50cm] (bert) at (4.62,3.40) {BERT-base (frozen)};
+\node[cell=org,minimum width=1.60cm,minimum height=0.50cm] (wt) at (6.75,3.40) {Linear $W_T$};
+\draw[arr] (bert) -- (wt);
+
+% ================================================================== input wiring
+\draw[arr] (2.80,9.30) -- (cat.west |- 0,9.30);
+\draw[ln] (2.80,7.00) -- (3.08,7.00);
+\draw[ln] (3.08,7.00) |- (3.20,6.90); \draw[arr] (3.20,6.90) -- (sb.west);
+\draw[ln] (2.80,5.70) -- (3.08,5.70); \draw[arr] (3.08,5.70) -- (pb.west);
+\draw[ln] (3.08,5.70) -- (3.08,9.12); \draw[arr] (3.08,9.12) -- (cat.west |- 0,9.12);
+\node[dot] at (3.08,7.00) {}; \node[dot] at (3.08,5.70) {};
+\draw[ln] (2.80,3.92) -- (3.08,3.92);
+\draw[ln] (3.08,3.40) -- (3.08,4.55);
+\draw[arr] (3.08,4.55) -- (pp.west); \draw[arr] (3.08,3.40) -- (bert.west);
+\node[dot] at (3.08,3.92) {};
+
+% ================================================================== spatial-token substitution
+\draw[draw=pur,fill=white,rounded corners=2pt,line width=0.6pt] (7.86,4.30) rectangle (8.80,6.00);
+\node[font=\fAb,text=ink] at (8.33,5.15) {$\mathbf{S}_{\mathrm{sp}}$};
+\node[note,font=\fontsize{5.4}{6}\selectfont] at (8.33,5.78) {$\pi(T)\!=\!\varnothing$};
+\node[note,font=\fontsize{5.4}{6}\selectfont] at (8.33,4.52) {$\pi(T)\!\neq\!\varnothing$};
+\draw[arr] (mi.east) -- (7.86,5.70);
+\draw[arr] (mu.east) -- (7.86,4.55);
+\node[note] at (8.33,4.02) {also gates\\$\mathcal{L}_{\mathrm{pl}}$};
+
+% ================================================================== column 3: denoiser
+\draw[panel=pur] (9.00,1.85) rectangle (13.00,11.95);
+\node[sub,minimum height=0.66cm] (enc) at (11.00,11.40) {\textbf{Layout encoder} $\times 2$\\[-1pt]{\fB input MLP + position embedding}};
+\draw[draw=pur,line width=0.5pt,rounded corners=2pt,fill=pur!3] (9.15,2.85) rectangle (12.88,10.30);
+\node[font=\fAb,text=ink,anchor=west] at (9.25,10.05) {Decoder block};
+\node[sub] (sa)  at (11.00,9.30) {Self-attention (layout tokens)};
+\node[sub] (ica) at (11.00,8.10) {Image cross-attention $\times\, w_{\mathrm{CGB}}$};
+\node[sub] (sca) at (11.00,6.90) {Saliency-box cross-attention};
+\node[sub] (spa) at (11.00,5.70) {Spatial cross-attention ($\mathbf{S}_{\mathrm{sp}}$)};
+\node[sub] (pca) at (11.00,4.50) {Prompt-token cross-attention};
+\node[sub] (ffn) at (11.00,3.30) {Feed-forward network};
+\foreach \a/\b in {sa/ica,ica/sca,sca/spa,spa/pca,pca/ffn} \draw[arr] (\a) -- (\b);
+\draw[arr] (enc.south) -- (sa.north);
+\draw[ln,rounded corners=2pt] (ffn.east) -- (12.78,3.30) -- (12.78,9.30);
+\draw[arr] (12.78,9.30) -- (sa.east);
+\node[font=\fAb,text=ink] at (12.55,10.05) {$\times 4$};
+\node[sub,minimum height=0.50cm] (mlp) at (11.00,2.35) {Output MLP};
+\draw[arr] (ffn.south) -- (mlp.north);
+% timestep conditioning
+\draw[arr] (2.80,10.60) -- (10.88,10.60);
+\node[note,anchor=south west] at (9.10,10.62) {AdaLN in all blocks};
+
+% conditioning arrows into the decoder
+\draw[ln] (Z.east) -- (7.80,9.30); \draw[ln] (7.80,9.30) -- (7.80,8.25); \draw[arr] (7.80,8.25) -- (ica.west |- 0,8.25);
+\draw[arr] (qm.east) -- (ica.west |- 0,7.95);
+\node[note,anchor=south] at (8.40,7.96) {$w_{\mathrm{CGB}}$};
+\node[note,anchor=south] at (8.40,8.26) {$Z$};
+\draw[arr] (ms.east) -- (sca.west);
+\draw[arr] (8.80,5.70) -- (spa.west);
+\draw[ln] (wt.east) -- (8.86,3.40); \draw[ln] (8.86,3.40) -- (8.86,4.50); \draw[arr] (8.86,4.50) -- (pca.west);
+\draw[arr] (2.80,11.40) -- (enc.west);
+
+% ================================================================== column 4: sampling and training
+% inference
+\draw[panel=ind] (13.60,6.55) rectangle (18.40,11.95);
+\node[font=\fAb,text=ind!70!black,anchor=north west] at (13.70,11.87) {Inference};
+\node[cell=ind,minimum width=2.40cm,minimum height=0.74cm] (ddim) at (14.95,10.95)
+  {\textbf{DDIM sampler}\\[-1pt]{\fB 100 steps, $S_{\mathrm{L}}$ or $S_{\mathrm{C}}$}};
+\draw[arr] (ddim.west |- 0,11.20) -- (enc.east |- 0,11.20);
+\node[note,anchor=south] at (13.30,11.22) {$\mathbf{L}_{t-1}$};
+\node[thumb=ind] (out) at (17.30,9.30) {\includegraphics[height=2.30cm]{arch/output.png}};
+\node[font=\fAb,text=ink] at (17.30,7.85) {Generated layout $\mathbf{L}_0$};
+\node[note] at (17.30,7.55) {element classes + boxes};
+\draw[ln] (ddim.east) -- (17.30,10.95); \draw[arr] (17.30,10.95) -- (out.north);
+\node[note,anchor=west,align=left] at (17.38,10.72) {after\\100 steps};
+% training
+\draw[panel=red,dash pattern=on 2.5pt off 1.5pt] (13.60,1.85) rectangle (18.40,6.30);
+\node[font=\fAb,text=red!75!black,anchor=north west] at (13.70,6.22) {Training only};
+\node[cell=ind,minimum width=1.70cm,minimum height=0.50cm] (eps) at (14.50,2.35) {Noise $\hat{\boldsymbol\epsilon}$};
+\node[cell=ind,minimum width=1.70cm,minimum height=0.58cm] (l0) at (14.50,3.70) {One-step\\[-1pt]estimate $\hat{\mathbf{L}}_0$};
+\draw[arr] (eps) -- (l0);
+\node[cell=red,minimum width=2.75cm,minimum height=0.50cm] (le) at (16.98,2.35) {Denoising loss $\mathcal{L}_{\epsilon}$};
+\node[cell=red,minimum width=2.75cm,minimum height=0.58cm,dash pattern=on 2pt off 1.2pt] (lc) at (16.98,3.70)
+  {Count loss $\mathcal{L}_{\mathrm{cnt}}$\\[-1pt]{\fB optional ($\lambda_1$)}};
+\node[cell=red,minimum width=2.75cm,minimum height=0.66cm] (lp) at (16.98,5.05)
+  {Placement loss $\mathcal{L}_{\mathrm{pl}}$ ($\lambda_2$)\\[-1pt]{\fB gated: skipped if $\pi(T)\neq\varnothing$}};
+\draw[arr] (eps) -- (le);
+\draw[arr] (l0) -- (lc);
+\draw[arr] (l0.north) |- (lp.west);
+% model output to sampler and losses
+\draw[ln] (mlp.east) -- (13.30,2.35); \node[dot] at (13.30,2.35) {};
+\draw[arr] (13.30,2.35) -- (eps.west);
+\draw[ln] (13.30,2.35) -- (13.30,10.75); \draw[arr] (13.30,10.75) -- (ddim.west |- 0,10.75);
+\node[note,anchor=north] at (13.30,2.22) {$\hat{\boldsymbol\epsilon}$};
+
+% ================================================================== footnote
+\node[note,anchor=west] at (0,1.55) {BERT-base and the placement predictor $f_\psi$ are frozen; all other modules are trained from scratch.};
+\end{tikzpicture}
+\end{document}

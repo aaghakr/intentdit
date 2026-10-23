@@ -1,0 +1,157 @@
+% Figure 2: IntentDiT architecture (vector TikZ drawing).
+% Compile from a directory that holds the four thumbnails input.png, saliency.png, placement.png and output.png
+% in a subfolder arch/ (dataset-derived images; see scripts/paper/22_paper_figures.sh, ARCH_TILES):
+%   pdflatex -interaction=nonstopmode plot_architecture.tex
+% Drawn at the MDPI full width (\fulllength = 7.27 in = 18.47 cm) so that it is placed unscaled.
+\documentclass[tikz,border=1pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{positioning,arrows.meta,calc,backgrounds,fit}
+
+% ---- palette: muted blue (visual), teal (saliency), purple (spatial), warm orange (prompt), warm gray (neutral)
+\definecolor{vis}{HTML}{3A6EA5}
+\definecolor{sal}{HTML}{2E8B7A}
+\definecolor{spa}{HTML}{6B4FA8}
+\definecolor{txt}{HTML}{C8692A}
+\definecolor{ink}{HTML}{1F1F1D}
+\definecolor{muted}{HTML}{66655F}
+\definecolor{frame}{HTML}{C4C2BB}
+\definecolor{panel}{HTML}{F6F5F2}
+
+\newcommand{\fH}{\fontsize{8.5}{10}\selectfont\bfseries}   % column headers
+\newcommand{\fP}{\fontsize{7}{8}\selectfont\bfseries}        % panel titles
+\newcommand{\fA}{\fontsize{7.5}{8.5}\selectfont}             % box labels
+\newcommand{\fB}{\fontsize{6.5}{7.5}\selectfont}             % secondary labels
+
+\tikzset{
+  >={Stealth[length=2mm,width=1.5mm]},
+  arr/.style={->,draw=ink,line width=0.55pt},
+  flow/.style={draw=ink,line width=0.55pt},
+  box/.style 2 args={draw=#1,fill=#1!8,rounded corners=2pt,line width=0.6pt,minimum height=0.44cm,
+              text width=#2,align=center,font=\fA,text=ink,inner xsep=2pt,inner ysep=2pt},
+  attn/.style={draw=#1,fill=#1!10,rounded corners=2pt,line width=0.6pt,minimum height=0.46cm,
+               text width=4.3cm,align=center,font=\fA,text=ink,inner sep=2pt},
+  pill/.style={draw=#1,fill=#1!10,rounded corners=5pt,line width=0.5pt,minimum height=0.36cm,
+               align=center,font=\fB,text=#1!60!black,inner xsep=4pt,inner ysep=1.5pt},
+  group/.style={draw=#1,fill=#1!4,rounded corners=4pt,line width=0.5pt,inner xsep=5pt,inner ysep=4pt},
+  thumb/.style={inner sep=0pt,draw=frame,line width=0.4pt},
+  lab/.style={font=\fB,text=muted,align=center},
+  dot/.style={circle,fill=ink,inner sep=0pt,minimum size=2.4pt},
+  head/.style={font=\fH,text=ink,anchor=base},
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ================================================================ column headers
+  \node[head] at (1.10,9.00) {Inputs};
+  \node[head] at (6.25,9.00) {Conditioning pathways};
+  \node[head] at (12.95,9.00) {Layout denoiser $\epsilon_\theta$};
+  \node[head] at (17.05,9.00) {Sampler and output};
+  \draw[frame,line width=0.5pt] (0.05,8.84) -- (18.40,8.84);
+
+  % ================================================================ layout denoiser (column C)
+  \def\xc{12.95}
+  \node[box={muted}{4.7cm},minimum height=0.58cm] (lenc) at (\xc,8.35)
+        {Layout encoder (2 self-attention blocks)\\[-1pt]{\fB noisy layout $\mathbf{L}_t$ at step $t$ $\;\to\;$ layout tokens $\mathbf{X}$}};
+  \node[attn=muted] (sa)  at (\xc,7.25) {Self-attention};
+  \node[attn=vis]   (ica) at (\xc,6.00) {Image cross-attention, weight $w_{\mathrm{CGB}}$};
+  \node[attn=sal]   (sca) at (\xc,4.80) {Saliency-box cross-attention};
+  \node[attn=spa]   (pca) at (\xc,3.30) {Spatial cross-attention, tokens $\mathbf{S}_{\mathrm{sp}}$};
+  \node[attn=txt]   (tca) at (\xc,1.60) {Prompt-token cross-attention};
+  \node[attn=muted] (ffn) at (\xc,0.35) {Feed-forward network};
+  \foreach \a/\b in {sa/ica,ica/sca,sca/pca,pca/tca,tca/ffn} \draw[arr] (\a) -- (\b);
+  \coordinate (blocktop) at ($(sa.north)+(0,0.34)$);
+  \begin{scope}[on background layer]
+    \node[draw=frame,fill=panel,rounded corners=4pt,line width=0.6pt,inner xsep=6pt,inner ysep=5pt,
+          fit={(sa)(ffn)(blocktop)}] (block) {};
+  \end{scope}
+  \node[font=\fP,text=ink,anchor=west] at ($(block.north west)+(0.12,-0.2)$) {Decoder block $\times\,4$};
+  \draw[arr] (lenc.south) -- (sa.north);
+
+  % ================================================================ inputs (column A)
+  \node[thumb] (img)  at (1.10,6.00) {\includegraphics[height=0.90cm]{arch/input.png}};
+  \node[thumb] (salm) at (1.10,4.80) {\includegraphics[height=0.90cm]{arch/saliency.png}};
+  \node[thumb] (plm)  at (1.10,3.30) {\includegraphics[height=0.90cm]{arch/placement.png}};
+  \node[lab,anchor=north,inner sep=1pt] at ($(img.south)+(0,-0.03)$)  {image $I$};
+  \node[lab,anchor=north,inner sep=1pt] at ($(salm.south)+(0,-0.03)$) {saliency map $s$};
+  \node[lab,anchor=north,inner sep=1pt] at ($(plm.south)+(0,-0.03)$)  {placement map $m$};
+  \node[draw=txt,fill=txt!5,rounded corners=2pt,line width=0.5pt,text width=1.95cm,font=\fB,
+        align=left,inner sep=3pt] (prompt) at (1.10,1.60)
+        {\textbf{Prompt $T$}\\``Design with 2 Texts at bottom-center, one \mbox{Underlay} at bottom-center.''};
+
+  % ================================================================ pathway panels (column B)
+  % --- visual stream
+  \node[box={vis}{2.6cm}]  (cat)  at (3.90,6.00) {Concatenate $[I;\,s;\,m]$};
+  \node[box={vis}{2.3cm}]  (vit)  at (6.65,6.00) {Visual encoder (ViT)};
+  \node[pill=vis]          (ztok) at (8.95,6.00) {image tokens $\mathbf{Z}$};
+  \draw[arr] (cat) -- (vit);  \draw[arr] (vit) -- (ztok);
+  % --- saliency boxes
+  \node[box={sal}{3.4cm}]  (sreg) at (4.30,4.80) {Salient regions $\to$ boxes $B^{\mathrm{sal}}$};
+  \node[box={sal}{1.15cm}] (fsal) at (6.95,4.80) {MLP $\phi_{\mathrm{sal}}$};
+  \node[pill=sal]          (stok) at (8.95,4.80) {saliency tokens};
+  \draw[arr] (sreg) -- (fsal);  \draw[arr] (fsal) -- (stok);
+  % --- spatial tokens with arbitration
+  \node[box={spa}{3.8cm}]  (preg) at (4.50,3.55) {Placement regions $\to$ boxes $B^{\mathrm{int}}$};
+  \node[box={spa}{2.0cm}] (fint) at (7.60,3.55) {MLP $\phi_{\mathrm{int}}$ (prior)};
+  \node[box={spa}{3.8cm}]  (pars) at (4.50,3.00) {Parser $\pi$ $\to$ $3{\times}3$ grid cells $(c,g)$};
+  \node[box={spa}{2.0cm}] (fusr) at (7.60,3.00) {MLP $\phi_{\mathrm{usr}}$ (user)};
+  \node[circle,draw=spa,fill=white,line width=0.7pt,minimum size=0.46cm,inner sep=0pt,font=\fB,text=spa!60!black]
+        (sw) at (9.02,3.28) {$\pi(T)$};
+  \node[pill=spa] (sptok) at (9.82,3.28) {$\mathbf{S}_{\mathrm{sp}}$};
+  \draw[arr] (preg) -- (fint);  \draw[arr] (pars) -- (fusr);
+  \draw[arr,draw=spa] (fint.east) -- ++(0.18,0) |- (sw.west);
+  \draw[arr,draw=spa] (fusr.east) -- ++(0.18,0) |- (sw.west);
+  \draw[arr,draw=spa] (sw.east) -- (sptok.west);
+  \node[lab,text=spa!70!black,anchor=north] (spnote) at (8.4,2.74) {user tokens replace prior tokens if $\pi(T)\neq\emptyset$};
+  % --- prompt tokens
+  \node[box={txt}{2.3cm}]  (bert) at (3.75,1.60) {BERT-base (frozen)};
+  \node[box={txt}{1.7cm}]  (wt)   at (6.15,1.60) {Projection $W_T$};
+  \node[pill=txt]          (ttok) at (8.95,1.60) {prompt tokens $\mathbf{H}W_T$};
+  \draw[arr] (bert) -- (wt);  \draw[arr] (wt) -- (ttok);
+  % --- panels behind the rows
+  \begin{scope}[on background layer]
+    \coordinate (tvis) at (3.0,6.52); \coordinate (tsal) at (3.0,5.32); \coordinate (tspa) at (3.0,4.07); \coordinate (ttxt) at (3.0,2.12);
+    \node[group=vis,fit=(cat)(vit)(ztok)(tvis)] (gvis) {};
+    \node[group=sal,fit=(sreg)(fsal)(stok)(tsal)] (gsal) {};
+    \node[group=spa,fit=(preg)(pars)(fint)(fusr)(sw)(sptok)(spnote)(tspa)] (gspa) {};
+    \node[group=txt,fit=(bert)(wt)(ttok)(ttxt)] (gtxt) {};
+  \end{scope}
+  \foreach \grp/\col/\ttl in {gvis/vis/Visual stream,gsal/sal/Saliency boxes,gspa/spa/Spatial tokens and arbitration,gtxt/txt/Prompt tokens}
+    \node[font=\fP,text=\col!70!black,anchor=north west,inner sep=1pt] at ($(\grp.north west)+(0.08,-0.04)$) {\ttl};
+
+  % --- inputs to pathways
+  \coordinate (bus) at (2.28,0);
+  \draw[flow] (img.east) -- (img.east -| bus);
+  \draw[flow] (salm.east) -- (salm.east -| bus) node[dot] {};
+  \draw[flow] (plm.east) -- (plm.east -| bus) node[dot] {};
+  \draw[flow] (plm.east -| bus) -- (img.east -| bus);
+  \draw[arr] (img.east -| bus) -- (cat.west);
+  \draw[arr] (salm.east -| bus) -- (sreg.west);
+  \draw[arr] (plm.east -| bus) -- ++(0.12,0) |- (preg.west);
+  \draw[arr] (prompt.east) -- (bert.west);
+  \draw[arr] (prompt.east) -- ++(0.18,0) node[dot] {} |- (pars.west);
+
+  % --- pathway tokens to the cross-attention slots
+  \draw[arr,draw=vis] (ztok.east) -- (ica.west);
+  \draw[arr,draw=sal] (stok.east) -- (sca.west);
+  \draw[arr,draw=spa] (sptok.east) -- (pca.west);
+  \draw[arr,draw=txt] (ttok.east) -- (tca.west);
+
+  % ================================================================ sampler and output (column D)
+  \node[box={muted}{2.3cm},minimum height=0.58cm] (samp) at (17.05,0.35)
+        {DDIM sampler\\[-1pt]{\fB $S_{\mathrm{L}}$ or $S_{\mathrm{C}}$, 100 steps}};
+  \draw[arr] (ffn.east) -- node[lab,above,pos=0.5,fill=white,inner sep=1pt] {noise $\hat{\epsilon}$} (samp.west);
+  \draw[arr,dashed,draw=muted] (samp.east) -- ++(0.22,0) |- node[lab,pos=0.80,above] {$\mathbf{L}_{t-1}$, next step} (lenc.east);
+  \node[thumb] (out) at (17.05,4.6) {\includegraphics[height=2.4cm]{arch/output.png}};
+  \node[lab,anchor=south] at ($(out.north)+(0,0.06)$) {generated layout $\mathbf{L}_0$};
+  \draw[arr] (samp.north) -- node[lab,left,pos=0.45] {$\mathbf{L}_0$ after\\the last step} (out.south);
+
+  % ================================================================ training objective
+  \node[draw=frame,fill=white,rounded corners=2pt,font=\fB,text=ink,inner sep=4pt,align=left,text width=7.1cm,
+        anchor=north west] at (2.55,1.08)
+        {\textbf{Training:}\; $\mathcal{L}=\mathcal{L}_{\epsilon}+\lambda_1\mathcal{L}_{\mathrm{cnt}}+\lambda_2\mathcal{L}_{\mathrm{pl}}$.
+         The placement loss $\mathcal{L}_{\mathrm{pl}}$ is gated by the same decision: it is active only for samples with $\pi(T)=\emptyset$ (Equation~(6)).};
+\end{tikzpicture}
+\end{document}
